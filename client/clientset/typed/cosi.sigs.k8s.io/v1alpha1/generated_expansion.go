@@ -20,6 +20,12 @@ package v1alpha1
 
 type BucketExpansion interface{}
 
+type BucketAccessExpansion interface{}
+
+type BucketAccessClassExpansion interface{}
+
+type BucketAccessRequestExpansion interface{}
+
 type BucketClassExpansion interface{}
 
 type BucketRequestExpansion interface{}

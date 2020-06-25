@@ -27,6 +27,9 @@ import (
 type CosiV1alpha1Interface interface {
 	RESTClient() rest.Interface
 	BucketsGetter
+	BucketAccessesGetter
+	BucketAccessClassesGetter
+	BucketAccessRequestsGetter
 	BucketClassesGetter
 	BucketRequestsGetter
 }
@@ -38,6 +41,18 @@ type CosiV1alpha1Client struct {
 
 func (c *CosiV1alpha1Client) Buckets() BucketInterface {
 	return newBuckets(c)
+}
+
+func (c *CosiV1alpha1Client) BucketAccesses(namespace string) BucketAccessInterface {
+	return newBucketAccesses(c, namespace)
+}
+
+func (c *CosiV1alpha1Client) BucketAccessClasses(namespace string) BucketAccessClassInterface {
+	return newBucketAccessClasses(c, namespace)
+}
+
+func (c *CosiV1alpha1Client) BucketAccessRequests(namespace string) BucketAccessRequestInterface {
+	return newBucketAccessRequests(c, namespace)
 }
 
 func (c *CosiV1alpha1Client) BucketClasses() BucketClassInterface {

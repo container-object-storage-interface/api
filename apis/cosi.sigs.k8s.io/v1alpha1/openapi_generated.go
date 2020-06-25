@@ -29,22 +29,31 @@ import (
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
 	return map[string]common.OpenAPIDefinition{
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.AnonymousAccessMode":  schema_api_apis_cosisigsk8sio_v1alpha1_AnonymousAccessMode(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.AzureProtocol":        schema_api_apis_cosisigsk8sio_v1alpha1_AzureProtocol(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.Bucket":               schema_api_apis_cosisigsk8sio_v1alpha1_Bucket(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketClass":          schema_api_apis_cosisigsk8sio_v1alpha1_BucketClass(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketClassList":      schema_api_apis_cosisigsk8sio_v1alpha1_BucketClassList(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketList":           schema_api_apis_cosisigsk8sio_v1alpha1_BucketList(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequest":        schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequest(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestBinding": schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestBinding(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestList":    schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestList(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestSpec":    schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestSpec(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestStatus":  schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestStatus(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketSpec":           schema_api_apis_cosisigsk8sio_v1alpha1_BucketSpec(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketStatus":         schema_api_apis_cosisigsk8sio_v1alpha1_BucketStatus(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.GCSProtocol":          schema_api_apis_cosisigsk8sio_v1alpha1_GCSProtocol(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.Protocol":             schema_api_apis_cosisigsk8sio_v1alpha1_Protocol(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.S3Protocol":           schema_api_apis_cosisigsk8sio_v1alpha1_S3Protocol(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.AnonymousAccessMode":     schema_api_apis_cosisigsk8sio_v1alpha1_AnonymousAccessMode(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.AzureProtocol":           schema_api_apis_cosisigsk8sio_v1alpha1_AzureProtocol(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.Bucket":                  schema_api_apis_cosisigsk8sio_v1alpha1_Bucket(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccess":            schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccess(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessClass":       schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessClass(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessClassList":   schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessClassList(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessList":        schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessList(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequest":     schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequest(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequestList": schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequestList(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequestSpec": schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequestSpec(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessSpec":        schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessSpec(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketClass":             schema_api_apis_cosisigsk8sio_v1alpha1_BucketClass(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketClassList":         schema_api_apis_cosisigsk8sio_v1alpha1_BucketClassList(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketList":              schema_api_apis_cosisigsk8sio_v1alpha1_BucketList(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequest":           schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequest(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestBinding":    schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestBinding(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestList":       schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestList(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestSpec":       schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestSpec(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestStatus":     schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestStatus(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketSpec":              schema_api_apis_cosisigsk8sio_v1alpha1_BucketSpec(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketStatus":            schema_api_apis_cosisigsk8sio_v1alpha1_BucketStatus(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.GCSProtocol":             schema_api_apis_cosisigsk8sio_v1alpha1_GCSProtocol(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.PolicyActions":           schema_api_apis_cosisigsk8sio_v1alpha1_PolicyActions(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.Protocol":                schema_api_apis_cosisigsk8sio_v1alpha1_Protocol(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.S3Protocol":              schema_api_apis_cosisigsk8sio_v1alpha1_S3Protocol(ref),
 	}
 }
 
@@ -145,6 +154,389 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_Bucket(ref common.ReferenceCallback)
 	}
 }
 
+func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccess(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessSpec"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessClass(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"provisioner": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"policyActions": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.PolicyActions"),
+						},
+					},
+					"supportedProtocols": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.PolicyActions", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessClassList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessClass"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessClass", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccess"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccess", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequest(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"),
+						},
+					},
+					"spec": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequestSpec"),
+						},
+					},
+				},
+			},
+		},
+		Dependencies: []string{
+			"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequestSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+	}
+}
+
+func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequestList(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"kind": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Kind is a string value representing the REST resource this object represents. Servers may infer this from the endpoint the client submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"apiVersion": {
+						SchemaProps: spec.SchemaProps{
+							Description: "APIVersion defines the versioned schema of this representation of an object. Servers should convert recognized schemas to the latest internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+					"metadata": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"),
+						},
+					},
+					"items": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequest"),
+									},
+								},
+							},
+						},
+					},
+				},
+				Required: []string{"items"},
+			},
+		},
+		Dependencies: []string{
+			"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequest", "k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta"},
+	}
+}
+
+func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequestSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"serviceAccountName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"accessSecretName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"bucket": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"bucketAccessClassName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"bucketAccessRequestName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessSpec(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"bucketAccessRequestName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"bucketAccessRequestNamespace": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"serviceAccountName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"keySecretName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"provisioner": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"parameters": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"object"},
+							AdditionalProperties: &spec.SchemaOrBool{
+								Allows: true,
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_api_apis_cosisigsk8sio_v1alpha1_BucketClass(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -180,6 +572,19 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketClass(ref common.ReferenceCall
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"boolean"},
 							Format: "",
+						},
+					},
+					"additionalPermittedNamespaces": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
 						},
 					},
 					"supportedProtocols": {
@@ -631,6 +1036,44 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_GCSProtocol(ref common.ReferenceCall
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_api_apis_cosisigsk8sio_v1alpha1_PolicyActions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"allow": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
+						},
+					},
+					"deny": {
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Type:   []string{"string"},
+										Format: "",
+									},
+								},
+							},
 						},
 					},
 				},

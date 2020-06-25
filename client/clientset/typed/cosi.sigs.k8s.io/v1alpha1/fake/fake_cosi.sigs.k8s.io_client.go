@@ -32,6 +32,18 @@ func (c *FakeCosiV1alpha1) Buckets() v1alpha1.BucketInterface {
 	return &FakeBuckets{c}
 }
 
+func (c *FakeCosiV1alpha1) BucketAccesses(namespace string) v1alpha1.BucketAccessInterface {
+	return &FakeBucketAccesses{c, namespace}
+}
+
+func (c *FakeCosiV1alpha1) BucketAccessClasses(namespace string) v1alpha1.BucketAccessClassInterface {
+	return &FakeBucketAccessClasses{c, namespace}
+}
+
+func (c *FakeCosiV1alpha1) BucketAccessRequests(namespace string) v1alpha1.BucketAccessRequestInterface {
+	return &FakeBucketAccessRequests{c, namespace}
+}
+
 func (c *FakeCosiV1alpha1) BucketClasses() v1alpha1.BucketClassInterface {
 	return &FakeBucketClasses{c}
 }
