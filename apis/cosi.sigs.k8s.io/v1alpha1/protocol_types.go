@@ -12,6 +12,6 @@ type Protocol struct {
 	ProtocolSignature ProtocolSignature `json:"protocolSignature"`
 	S3                S3Protocol        `json:"s3,omitempty"`
 	Azure             AzureProtocol     `json:"azure,omitempty"`
-	GCS               GCSProtcol        `json:"gcs,omitempty"`
+	GCS               GCSProtocol        `json:"gcs,omitempty"`
 }
 

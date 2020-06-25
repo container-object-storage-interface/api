@@ -29,20 +29,6 @@ type BucketRequestStatus struct {
 	Phase BucketPhase `json:"phase,omitempty"`
 }
 
-type BucketRequest struct {
-	metav1.TypeMeta   `json:",inline"`
-	metav1.ObjectMeta `json:"metadata,omitempty"`
-
-	Spec   BucketRequestSpec   `json:"spec,omitempty"`
-	Status BucketRequestStatus `json:"status,omitempty"`
-}
-
-type BucketRequestList struct {
-	metav1.TypeMeta `json:",inline"`
-	metav1.ListMeta `json:"metadata,omitempty"`
-	Items           []BucketRequest `json:"items"`
-}
-
 type AnonymousAccessMode struct {
 	Private         bool `json:"private,omitempty"`
 	PublicReadOnly  bool `json:"publicReadOnly,omitempty"`
@@ -64,6 +50,36 @@ type BucketStatus struct {
 	BoundBucketRequests BucketRequestBinding `json:"boundBucketRequests,omitempty"`
 }
 
+type ReleasePolicy string
+
+const (
+	ReleasePolicyRetain ReleasePolicy = "retain"
+	ReleasePolicyDelete ReleasePolicy = "delete"
+)
+
+// +genclient
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type BucketRequest struct {
+	metav1.TypeMeta   `json:",inline"`
+	metav1.ObjectMeta `json:"metadata,omitempty"`
+
+	Spec   BucketRequestSpec   `json:"spec,omitempty"`
+	Status BucketRequestStatus `json:"status,omitempty"`
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
+type BucketRequestList struct {
+	metav1.TypeMeta `json:",inline"`
+	metav1.ListMeta `json:"metadata,omitempty"`
+	Items           []BucketRequest `json:"items"`
+}
+
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type Bucket struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
@@ -72,30 +88,32 @@ type Bucket struct {
 	Status BucketStatus `json:"status,omitempty"`
 }
 
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+
 type BucketList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []Bucket `json:"items"`
 }
 
-type ReleasePolicy string
-
-const (
-	ReleasePolicyRetain ReleasePolicy = "retain"
-	ReleasePolicyDelete ReleasePolicy = "delete"
-)
+// +genclient
+// +genclient:nonNamespaced
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type BucketClass struct {
 	metav1.TypeMeta   `json:",inline"`
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Provisioner          string                `json:"provisioner,omitempty"`
-	IsDefaultBucketClass bool                  `json:"isDefaultBucketClass,omitempty"`
-	SupportedProtocols   []Protocol            `json:"supportedProtocols"`
-	AnonymousAccessModes []AnonymousAccessMode `json:"anonymousAccessModes,omitempty"`
-	ReleasePolicy        ReleasePolicy         `json:"releasePolicy,omitempty"`
-	Parameters           map[string]string     `json:"parameters,omitempty"`
+	Provisioner                   string                `json:"provisioner,omitempty"`
+	IsDefaultBucketClass          bool                  `json:"isDefaultBucketClass,omitempty"`
+	AdditionalPermittedNamespaces []string              `json:"additionalPermittedNamespaces,omitempty"`
+	SupportedProtocols            []Protocol            `json:"supportedProtocols"`
+	AnonymousAccessModes          []AnonymousAccessMode `json:"anonymousAccessModes,omitempty"`
+	ReleasePolicy                 ReleasePolicy         `json:"releasePolicy,omitempty"`
+	Parameters                    map[string]string     `json:"parameters,omitempty"`
 }
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 
 type BucketClassList struct {
 	metav1.TypeMeta `json:",inline"`
