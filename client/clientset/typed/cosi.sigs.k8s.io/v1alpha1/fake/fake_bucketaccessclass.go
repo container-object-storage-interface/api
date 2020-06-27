@@ -33,7 +33,6 @@ import (
 // FakeBucketAccessClasses implements BucketAccessClassInterface
 type FakeBucketAccessClasses struct {
 	Fake *FakeCosiV1alpha1
-	ns   string
 }
 
 var bucketaccessclassesResource = schema.GroupVersionResource{Group: "cosi.sigs.k8s.io", Version: "v1alpha1", Resource: "bucketaccessclasses"}
@@ -43,7 +42,7 @@ var bucketaccessclassesKind = schema.GroupVersionKind{Group: "cosi.sigs.k8s.io",
 // Get takes name of the bucketAccessClass, and returns the corresponding bucketAccessClass object, and an error if there is any.
 func (c *FakeBucketAccessClasses) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.BucketAccessClass, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewGetAction(bucketaccessclassesResource, c.ns, name), &v1alpha1.BucketAccessClass{})
+		Invokes(testing.NewGetAction(bucketaccessclassesResource, "", name), &v1alpha1.BucketAccessClass{})
 
 	if obj == nil {
 		return nil, err
@@ -54,7 +53,7 @@ func (c *FakeBucketAccessClasses) Get(ctx context.Context, name string, options 
 // List takes label and field selectors, and returns the list of BucketAccessClasses that match those selectors.
 func (c *FakeBucketAccessClasses) List(ctx context.Context, opts v1.ListOptions) (result *v1alpha1.BucketAccessClassList, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewListAction(bucketaccessclassesResource, bucketaccessclassesKind, c.ns, opts), &v1alpha1.BucketAccessClassList{})
+		Invokes(testing.NewListAction(bucketaccessclassesResource, bucketaccessclassesKind, "", opts), &v1alpha1.BucketAccessClassList{})
 
 	if obj == nil {
 		return nil, err
@@ -76,14 +75,14 @@ func (c *FakeBucketAccessClasses) List(ctx context.Context, opts v1.ListOptions)
 // Watch returns a watch.Interface that watches the requested bucketAccessClasses.
 func (c *FakeBucketAccessClasses) Watch(ctx context.Context, opts v1.ListOptions) (watch.Interface, error) {
 	return c.Fake.
-		InvokesWatch(testing.NewWatchAction(bucketaccessclassesResource, c.ns, opts))
+		InvokesWatch(testing.NewWatchAction(bucketaccessclassesResource, "", opts))
 
 }
 
 // Create takes the representation of a bucketAccessClass and creates it.  Returns the server's representation of the bucketAccessClass, and an error, if there is any.
 func (c *FakeBucketAccessClasses) Create(ctx context.Context, bucketAccessClass *v1alpha1.BucketAccessClass, opts v1.CreateOptions) (result *v1alpha1.BucketAccessClass, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewCreateAction(bucketaccessclassesResource, c.ns, bucketAccessClass), &v1alpha1.BucketAccessClass{})
+		Invokes(testing.NewCreateAction(bucketaccessclassesResource,"",  bucketAccessClass), &v1alpha1.BucketAccessClass{})
 
 	if obj == nil {
 		return nil, err
@@ -94,7 +93,7 @@ func (c *FakeBucketAccessClasses) Create(ctx context.Context, bucketAccessClass 
 // Update takes the representation of a bucketAccessClass and updates it. Returns the server's representation of the bucketAccessClass, and an error, if there is any.
 func (c *FakeBucketAccessClasses) Update(ctx context.Context, bucketAccessClass *v1alpha1.BucketAccessClass, opts v1.UpdateOptions) (result *v1alpha1.BucketAccessClass, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewUpdateAction(bucketaccessclassesResource, c.ns, bucketAccessClass), &v1alpha1.BucketAccessClass{})
+		Invokes(testing.NewUpdateAction(bucketaccessclassesResource, "", bucketAccessClass), &v1alpha1.BucketAccessClass{})
 
 	if obj == nil {
 		return nil, err
@@ -105,14 +104,14 @@ func (c *FakeBucketAccessClasses) Update(ctx context.Context, bucketAccessClass 
 // Delete takes name of the bucketAccessClass and deletes it. Returns an error if one occurs.
 func (c *FakeBucketAccessClasses) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	_, err := c.Fake.
-		Invokes(testing.NewDeleteAction(bucketaccessclassesResource, c.ns, name), &v1alpha1.BucketAccessClass{})
+		Invokes(testing.NewDeleteAction(bucketaccessclassesResource, "", name), &v1alpha1.BucketAccessClass{})
 
 	return err
 }
 
 // DeleteCollection deletes a collection of objects.
 func (c *FakeBucketAccessClasses) DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error {
-	action := testing.NewDeleteCollectionAction(bucketaccessclassesResource, c.ns, listOpts)
+	action := testing.NewDeleteCollectionAction(bucketaccessclassesResource, "", listOpts)
 
 	_, err := c.Fake.Invokes(action, &v1alpha1.BucketAccessClassList{})
 	return err
@@ -121,7 +120,7 @@ func (c *FakeBucketAccessClasses) DeleteCollection(ctx context.Context, opts v1.
 // Patch applies the patch and returns the patched bucketAccessClass.
 func (c *FakeBucketAccessClasses) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.BucketAccessClass, err error) {
 	obj, err := c.Fake.
-		Invokes(testing.NewPatchSubresourceAction(bucketaccessclassesResource, c.ns, name, pt, data, subresources...), &v1alpha1.BucketAccessClass{})
+		Invokes(testing.NewPatchSubresourceAction(bucketaccessclassesResource, "", name, pt, data, subresources...), &v1alpha1.BucketAccessClass{})
 
 	if obj == nil {
 		return nil, err

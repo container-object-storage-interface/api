@@ -33,7 +33,7 @@ import (
 // BucketAccessesGetter has a method to return a BucketAccessInterface.
 // A group's client should implement this interface.
 type BucketAccessesGetter interface {
-	BucketAccesses(namespace string) BucketAccessInterface
+	BucketAccesses() BucketAccessInterface
 }
 
 // BucketAccessInterface has methods to work with BucketAccess resources.
@@ -52,14 +52,12 @@ type BucketAccessInterface interface {
 // bucketAccesses implements BucketAccessInterface
 type bucketAccesses struct {
 	client rest.Interface
-	ns     string
 }
 
 // newBucketAccesses returns a BucketAccesses
-func newBucketAccesses(c *CosiV1alpha1Client, namespace string) *bucketAccesses {
+func newBucketAccesses(c *CosiV1alpha1Client) *bucketAccesses {
 	return &bucketAccesses{
 		client: c.RESTClient(),
-		ns:     namespace,
 	}
 }
 
@@ -67,7 +65,6 @@ func newBucketAccesses(c *CosiV1alpha1Client, namespace string) *bucketAccesses 
 func (c *bucketAccesses) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.BucketAccess, err error) {
 	result = &v1alpha1.BucketAccess{}
 	err = c.client.Get().
-		Namespace(c.ns).
 		Resource("bucketaccesses").
 		Name(name).
 		VersionedParams(&options, scheme.ParameterCodec).
@@ -84,7 +81,6 @@ func (c *bucketAccesses) List(ctx context.Context, opts v1.ListOptions) (result 
 	}
 	result = &v1alpha1.BucketAccessList{}
 	err = c.client.Get().
-		Namespace(c.ns).
 		Resource("bucketaccesses").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -101,7 +97,6 @@ func (c *bucketAccesses) Watch(ctx context.Context, opts v1.ListOptions) (watch.
 	}
 	opts.Watch = true
 	return c.client.Get().
-		Namespace(c.ns).
 		Resource("bucketaccesses").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -112,7 +107,6 @@ func (c *bucketAccesses) Watch(ctx context.Context, opts v1.ListOptions) (watch.
 func (c *bucketAccesses) Create(ctx context.Context, bucketAccess *v1alpha1.BucketAccess, opts v1.CreateOptions) (result *v1alpha1.BucketAccess, err error) {
 	result = &v1alpha1.BucketAccess{}
 	err = c.client.Post().
-		Namespace(c.ns).
 		Resource("bucketaccesses").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(bucketAccess).
@@ -125,7 +119,6 @@ func (c *bucketAccesses) Create(ctx context.Context, bucketAccess *v1alpha1.Buck
 func (c *bucketAccesses) Update(ctx context.Context, bucketAccess *v1alpha1.BucketAccess, opts v1.UpdateOptions) (result *v1alpha1.BucketAccess, err error) {
 	result = &v1alpha1.BucketAccess{}
 	err = c.client.Put().
-		Namespace(c.ns).
 		Resource("bucketaccesses").
 		Name(bucketAccess.Name).
 		VersionedParams(&opts, scheme.ParameterCodec).
@@ -138,7 +131,6 @@ func (c *bucketAccesses) Update(ctx context.Context, bucketAccess *v1alpha1.Buck
 // Delete takes name of the bucketAccess and deletes it. Returns an error if one occurs.
 func (c *bucketAccesses) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	return c.client.Delete().
-		Namespace(c.ns).
 		Resource("bucketaccesses").
 		Name(name).
 		Body(&opts).
@@ -153,7 +145,6 @@ func (c *bucketAccesses) DeleteCollection(ctx context.Context, opts v1.DeleteOpt
 		timeout = time.Duration(*listOpts.TimeoutSeconds) * time.Second
 	}
 	return c.client.Delete().
-		Namespace(c.ns).
 		Resource("bucketaccesses").
 		VersionedParams(&listOpts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -166,7 +157,6 @@ func (c *bucketAccesses) DeleteCollection(ctx context.Context, opts v1.DeleteOpt
 func (c *bucketAccesses) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.BucketAccess, err error) {
 	result = &v1alpha1.BucketAccess{}
 	err = c.client.Patch(pt).
-		Namespace(c.ns).
 		Resource("bucketaccesses").
 		Name(name).
 		SubResource(subresources...).

@@ -33,7 +33,7 @@ import (
 // BucketAccessClassesGetter has a method to return a BucketAccessClassInterface.
 // A group's client should implement this interface.
 type BucketAccessClassesGetter interface {
-	BucketAccessClasses(namespace string) BucketAccessClassInterface
+	BucketAccessClasses() BucketAccessClassInterface
 }
 
 // BucketAccessClassInterface has methods to work with BucketAccessClass resources.
@@ -52,14 +52,12 @@ type BucketAccessClassInterface interface {
 // bucketAccessClasses implements BucketAccessClassInterface
 type bucketAccessClasses struct {
 	client rest.Interface
-	ns     string
 }
 
 // newBucketAccessClasses returns a BucketAccessClasses
-func newBucketAccessClasses(c *CosiV1alpha1Client, namespace string) *bucketAccessClasses {
+func newBucketAccessClasses(c *CosiV1alpha1Client) *bucketAccessClasses {
 	return &bucketAccessClasses{
 		client: c.RESTClient(),
-		ns:     namespace,
 	}
 }
 
@@ -67,7 +65,6 @@ func newBucketAccessClasses(c *CosiV1alpha1Client, namespace string) *bucketAcce
 func (c *bucketAccessClasses) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.BucketAccessClass, err error) {
 	result = &v1alpha1.BucketAccessClass{}
 	err = c.client.Get().
-		Namespace(c.ns).
 		Resource("bucketaccessclasses").
 		Name(name).
 		VersionedParams(&options, scheme.ParameterCodec).
@@ -84,7 +81,6 @@ func (c *bucketAccessClasses) List(ctx context.Context, opts v1.ListOptions) (re
 	}
 	result = &v1alpha1.BucketAccessClassList{}
 	err = c.client.Get().
-		Namespace(c.ns).
 		Resource("bucketaccessclasses").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -101,7 +97,6 @@ func (c *bucketAccessClasses) Watch(ctx context.Context, opts v1.ListOptions) (w
 	}
 	opts.Watch = true
 	return c.client.Get().
-		Namespace(c.ns).
 		Resource("bucketaccessclasses").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -112,7 +107,6 @@ func (c *bucketAccessClasses) Watch(ctx context.Context, opts v1.ListOptions) (w
 func (c *bucketAccessClasses) Create(ctx context.Context, bucketAccessClass *v1alpha1.BucketAccessClass, opts v1.CreateOptions) (result *v1alpha1.BucketAccessClass, err error) {
 	result = &v1alpha1.BucketAccessClass{}
 	err = c.client.Post().
-		Namespace(c.ns).
 		Resource("bucketaccessclasses").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(bucketAccessClass).
@@ -125,7 +119,6 @@ func (c *bucketAccessClasses) Create(ctx context.Context, bucketAccessClass *v1a
 func (c *bucketAccessClasses) Update(ctx context.Context, bucketAccessClass *v1alpha1.BucketAccessClass, opts v1.UpdateOptions) (result *v1alpha1.BucketAccessClass, err error) {
 	result = &v1alpha1.BucketAccessClass{}
 	err = c.client.Put().
-		Namespace(c.ns).
 		Resource("bucketaccessclasses").
 		Name(bucketAccessClass.Name).
 		VersionedParams(&opts, scheme.ParameterCodec).
@@ -138,7 +131,6 @@ func (c *bucketAccessClasses) Update(ctx context.Context, bucketAccessClass *v1a
 // Delete takes name of the bucketAccessClass and deletes it. Returns an error if one occurs.
 func (c *bucketAccessClasses) Delete(ctx context.Context, name string, opts v1.DeleteOptions) error {
 	return c.client.Delete().
-		Namespace(c.ns).
 		Resource("bucketaccessclasses").
 		Name(name).
 		Body(&opts).
@@ -153,7 +145,6 @@ func (c *bucketAccessClasses) DeleteCollection(ctx context.Context, opts v1.Dele
 		timeout = time.Duration(*listOpts.TimeoutSeconds) * time.Second
 	}
 	return c.client.Delete().
-		Namespace(c.ns).
 		Resource("bucketaccessclasses").
 		VersionedParams(&listOpts, scheme.ParameterCodec).
 		Timeout(timeout).
@@ -166,7 +157,6 @@ func (c *bucketAccessClasses) DeleteCollection(ctx context.Context, opts v1.Dele
 func (c *bucketAccessClasses) Patch(ctx context.Context, name string, pt types.PatchType, data []byte, opts v1.PatchOptions, subresources ...string) (result *v1alpha1.BucketAccessClass, err error) {
 	result = &v1alpha1.BucketAccessClass{}
 	err = c.client.Patch(pt).
-		Namespace(c.ns).
 		Resource("bucketaccessclasses").
 		Name(name).
 		SubResource(subresources...).

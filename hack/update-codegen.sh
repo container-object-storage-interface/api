@@ -13,8 +13,8 @@ defaulter-gen --input-dirs github.com/container-object-storage-interface/api/api
 	      --output-base $GOPATH/src \
 	      --output-package github.com/container-object-storage-interface/api/defaulters
 
-client-gen --input cosi.sigs.k8s.io/v1alpha1 \
-	   --input-base github.com/container-object-storage-interface/api/apis/ \
-	   --output-package github.com/container-object-storage-interface/api/client/ \
-	   --output-base $GOPATH/src \
-	   --clientset-name "clientset"
+#client-gen --input cosi.sigs.k8s.io/v1alpha1 \
+#	   --input-base github.com/container-object-storage-interface/api/apis/ \
+#	   --output-package github.com/container-object-storage-interface/api/client/ \
+#	   --output-base $GOPATH/src \
+#	   --clientset-name "clientset"
