@@ -5,7 +5,7 @@ type ProtocolSignature string
 const (
 	ProtocolSignatureS3    ProtocolSignature = "s3"
 	ProtocolSignatureAzure ProtocolSignature = "azure"
-	ProtcolSignatureGCS    ProtocolSignature = "gcs"
+	ProtocolSignatureGCS    ProtocolSignature = "gcs"
 )
 
 type Protocol struct {

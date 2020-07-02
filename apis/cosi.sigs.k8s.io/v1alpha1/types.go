@@ -18,15 +18,13 @@ type BucketRequestBinding struct {
 
 type BucketRequestSpec struct {
 	// +optional
-	Bucket          string            `json:"bucket"`
+	BucketName      string            `json:"bucketName,omitempty"`
 	// +optional
 	SecretName      string            `json:"secretName,omitempty"`
-	Provisioner     string            `json:"provisioner,omitempty"`
 	// +optional
 	BucketPrefix    string            `json:"bucketPrefix,omitempty"`
 	// +optional
 	BucketClassName string            `json:"bucketClassName,omitempty"`
-
 	Protocol        ProtocolSignature `json:"protocol"`
 }
 
@@ -208,11 +206,11 @@ type BucketAccessList struct {
 }
 
 type BucketAccessRequestSpec struct {
-	ServiceAccountName      string `json:"serviceAccountName,omitempty"`
-	AccessSecretName        string `json:"accessSecretName,omitempty"`
-	Bucket                  string `json:"bucket,omitempty"`
-	BucketAccessClassName   string `json:"bucketAccessClassName,omitempty"`
-	BucketAccessRequestName string `json:"bucketAccessRequestName,omitempty"`
+	ServiceAccountName    string `json:"serviceAccountName,omitempty"`
+	AccessSecretName      string `json:"accessSecretName,omitempty"`
+	BucketRequestName     string `json:"bucketRequestName,omitempty"`
+	BucketAccessClassName string `json:"bucketAccessClassName,omitempty"`
+	BucketAccessName      string `json:"bucketAccessName,omitempty"`
 }
 
 // +genclient
