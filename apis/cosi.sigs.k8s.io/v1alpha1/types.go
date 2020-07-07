@@ -17,11 +17,16 @@ type BucketRequestBinding struct {
 }
 
 type BucketRequestSpec struct {
+	// +optional
 	Bucket          string            `json:"bucket"`
+	// +optional
 	SecretName      string            `json:"secretName,omitempty"`
 	Provisioner     string            `json:"provisioner,omitempty"`
+	// +optional
 	BucketPrefix    string            `json:"bucketPrefix,omitempty"`
+	// +optional
 	BucketClassName string            `json:"bucketClassName,omitempty"`
+
 	Protocol        ProtocolSignature `json:"protocol"`
 }
 
@@ -39,6 +44,7 @@ type BucketSpec struct {
 	Provisioner         string              `json:"provisioner"`
 	AnonymousAccessMode AnonymousAccessMode `json:"anonymousAccessMode,omitempty"`
 	BucketClassName     string              `json:"bucketClassName,omitempty"`
+	// +listType=set
 	PermittedNamespaces []string            `json:"permittedNamespaces,omitempty"`
 	Protocol            Protocol            `json:"protocol"`
 	Parameters          map[string]string   `json:"parameters,omitempty"`
@@ -59,6 +65,9 @@ const (
 
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// +kubebuilder:resource:scope=Namespaced,path=bucketRequests
+// +kubebuilder:subresource:status
+// +kubebuilder:storageversion
 
 type BucketRequest struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -79,6 +88,9 @@ type BucketRequestList struct {
 // +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// +kubebuilder:resource:scope=Cluster,path=buckets
+// +kubebuilder:storageversion
+// +kubebuilder:subresource:status
 
 type Bucket struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -99,6 +111,8 @@ type BucketList struct {
 // +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// +kubebuilder:resource:scope=Cluster,path=bucketClasses
+// +kubebuilder:storageversion
 
 type BucketClass struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -106,8 +120,13 @@ type BucketClass struct {
 
 	Provisioner                   string                `json:"provisioner,omitempty"`
 	IsDefaultBucketClass          bool                  `json:"isDefaultBucketClass,omitempty"`
+	// +listType=set
 	AdditionalPermittedNamespaces []string              `json:"additionalPermittedNamespaces,omitempty"`
+
+	// +listType=atomic
 	SupportedProtocols            []Protocol            `json:"supportedProtocols"`
+
+	// +listType=set
 	AnonymousAccessModes          []AnonymousAccessMode `json:"anonymousAccessModes,omitempty"`
 	ReleasePolicy                 ReleasePolicy         `json:"releasePolicy,omitempty"`
 	Parameters                    map[string]string     `json:"parameters,omitempty"`
@@ -124,13 +143,17 @@ type BucketClassList struct {
 // Bucket Access Types
 
 type PolicyActions struct {
+	// +listType=set
 	Allow []string `json:"allow,omitempty"`
+	// +listType=set
 	Deny  []string `json:"deny,omitempty"`
 }
 
 // +genclient
 // +genclient:noStatus
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// +kubebuilder:resource:scope=Cluster,path=bucketAccessClasses
+// +kubebuilder:storageversion
 
 type BucketAccessClass struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -138,7 +161,10 @@ type BucketAccessClass struct {
 
 	Provisioner        string              `json:"provisioner,omitempty"`
 	PolicyActions      PolicyActions       `json:"policyActions,omitempty"`
+
+	// +listType=set
 	SupportedProtocols []ProtocolSignature `json:"supportedProtocols,omitempty"`
+
 	Parameters         map[string]string   `json:"parameters,omitempty"`
 }
 
@@ -162,6 +188,9 @@ type BucketAccessSpec struct {
 // +genclient
 // +genclient:noStatus
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// +kubebuilder:resource:scope=Cluster,path=bucketAccesses
+// +kubebuilder:storageversion
+// +kubebuilder:subresource:status
 
 type BucketAccess struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -189,6 +218,9 @@ type BucketAccessRequestSpec struct {
 // +genclient
 // +genclient:noStatus
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// +kubebuilder:resource:scope=Namespaced,path=bucketAccessRequests
+// +kubebuilder:storageversion
+// +kubebuilder:subresource:status
 
 type BucketAccessRequest struct {
 	metav1.TypeMeta   `json:",inline"`
