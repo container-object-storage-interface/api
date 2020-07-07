@@ -47,7 +47,6 @@ spec:
             secretName:
               type: string
           required:
-          - bucket
           - protocol
           type: object
         status:

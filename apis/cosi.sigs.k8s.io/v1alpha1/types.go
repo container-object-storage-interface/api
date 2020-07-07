@@ -17,11 +17,16 @@ type BucketRequestBinding struct {
 }
 
 type BucketRequestSpec struct {
+	// +optional
 	Bucket          string            `json:"bucket"`
+	// +optional
 	SecretName      string            `json:"secretName,omitempty"`
 	Provisioner     string            `json:"provisioner,omitempty"`
+	// +optional
 	BucketPrefix    string            `json:"bucketPrefix,omitempty"`
+	// +optional
 	BucketClassName string            `json:"bucketClassName,omitempty"`
+
 	Protocol        ProtocolSignature `json:"protocol"`
 }
 
@@ -39,6 +44,7 @@ type BucketSpec struct {
 	Provisioner         string              `json:"provisioner"`
 	AnonymousAccessMode AnonymousAccessMode `json:"anonymousAccessMode,omitempty"`
 	BucketClassName     string              `json:"bucketClassName,omitempty"`
+	// +listType=set
 	PermittedNamespaces []string            `json:"permittedNamespaces,omitempty"`
 	Protocol            Protocol            `json:"protocol"`
 	Parameters          map[string]string   `json:"parameters,omitempty"`
@@ -114,8 +120,13 @@ type BucketClass struct {
 
 	Provisioner                   string                `json:"provisioner,omitempty"`
 	IsDefaultBucketClass          bool                  `json:"isDefaultBucketClass,omitempty"`
+	// +listType=set
 	AdditionalPermittedNamespaces []string              `json:"additionalPermittedNamespaces,omitempty"`
+
+	// +listType=atomic
 	SupportedProtocols            []Protocol            `json:"supportedProtocols"`
+
+	// +listType=set
 	AnonymousAccessModes          []AnonymousAccessMode `json:"anonymousAccessModes,omitempty"`
 	ReleasePolicy                 ReleasePolicy         `json:"releasePolicy,omitempty"`
 	Parameters                    map[string]string     `json:"parameters,omitempty"`
@@ -132,7 +143,9 @@ type BucketClassList struct {
 // Bucket Access Types
 
 type PolicyActions struct {
+	// +listType=set
 	Allow []string `json:"allow,omitempty"`
+	// +listType=set
 	Deny  []string `json:"deny,omitempty"`
 }
 
@@ -148,7 +161,10 @@ type BucketAccessClass struct {
 
 	Provisioner        string              `json:"provisioner,omitempty"`
 	PolicyActions      PolicyActions       `json:"policyActions,omitempty"`
+
+	// +listType=set
 	SupportedProtocols []ProtocolSignature `json:"supportedProtocols,omitempty"`
+
 	Parameters         map[string]string   `json:"parameters,omitempty"`
 }
 

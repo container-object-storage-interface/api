@@ -74,6 +74,10 @@ spec:
                       type: string
                   type: object
                 protocolSignature:
+                  enum:
+                  - s3
+                  - azure
+                  - gcs
                   type: string
                 s3:
                   properties:
@@ -84,6 +88,9 @@ spec:
                     region:
                       type: string
                     signatureVersion:
+                      enum:
+                      - s3v2
+                      - s3v4
                       type: string
                   type: object
               required:

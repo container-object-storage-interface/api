@@ -229,6 +229,11 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessClass(ref common.Referen
 						},
 					},
 					"supportedProtocols": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "set",
+							},
+						},
 						SchemaProps: spec.SchemaProps{
 							Type: []string{"array"},
 							Items: &spec.SchemaOrArray{
@@ -575,6 +580,11 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketClass(ref common.ReferenceCall
 						},
 					},
 					"additionalPermittedNamespaces": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "set",
+							},
+						},
 						SchemaProps: spec.SchemaProps{
 							Type: []string{"array"},
 							Items: &spec.SchemaOrArray{
@@ -588,6 +598,11 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketClass(ref common.ReferenceCall
 						},
 					},
 					"supportedProtocols": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "atomic",
+							},
+						},
 						SchemaProps: spec.SchemaProps{
 							Type: []string{"array"},
 							Items: &spec.SchemaOrArray{
@@ -600,6 +615,11 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketClass(ref common.ReferenceCall
 						},
 					},
 					"anonymousAccessModes": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "set",
+							},
+						},
 						SchemaProps: spec.SchemaProps{
 							Type: []string{"array"},
 							Items: &spec.SchemaOrArray{
@@ -889,7 +909,7 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestSpec(ref common.Referen
 						},
 					},
 				},
-				Required: []string{"bucket", "protocol"},
+				Required: []string{"protocol"},
 			},
 		},
 	}
@@ -937,6 +957,11 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketSpec(ref common.ReferenceCallb
 						},
 					},
 					"permittedNamespaces": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "set",
+							},
+						},
 						SchemaProps: spec.SchemaProps{
 							Type: []string{"array"},
 							Items: &spec.SchemaOrArray{
@@ -1051,6 +1076,11 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_PolicyActions(ref common.ReferenceCa
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
 					"allow": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "set",
+							},
+						},
 						SchemaProps: spec.SchemaProps{
 							Type: []string{"array"},
 							Items: &spec.SchemaOrArray{
@@ -1064,6 +1094,11 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_PolicyActions(ref common.ReferenceCa
 						},
 					},
 					"deny": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "set",
+							},
+						},
 						SchemaProps: spec.SchemaProps{
 							Type: []string{"array"},
 							Items: &spec.SchemaOrArray{
