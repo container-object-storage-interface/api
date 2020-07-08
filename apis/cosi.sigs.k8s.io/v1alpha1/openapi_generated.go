@@ -29,31 +29,34 @@ import (
 
 func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenAPIDefinition {
 	return map[string]common.OpenAPIDefinition{
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.AnonymousAccessMode":     schema_api_apis_cosisigsk8sio_v1alpha1_AnonymousAccessMode(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.AzureProtocol":           schema_api_apis_cosisigsk8sio_v1alpha1_AzureProtocol(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.Bucket":                  schema_api_apis_cosisigsk8sio_v1alpha1_Bucket(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccess":            schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccess(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessClass":       schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessClass(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessClassList":   schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessClassList(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessList":        schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessList(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequest":     schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequest(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequestList": schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequestList(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequestSpec": schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequestSpec(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessSpec":        schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessSpec(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketClass":             schema_api_apis_cosisigsk8sio_v1alpha1_BucketClass(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketClassList":         schema_api_apis_cosisigsk8sio_v1alpha1_BucketClassList(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketList":              schema_api_apis_cosisigsk8sio_v1alpha1_BucketList(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequest":           schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequest(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestBinding":    schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestBinding(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestList":       schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestList(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestSpec":       schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestSpec(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestStatus":     schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestStatus(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketSpec":              schema_api_apis_cosisigsk8sio_v1alpha1_BucketSpec(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketStatus":            schema_api_apis_cosisigsk8sio_v1alpha1_BucketStatus(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.GCSProtocol":             schema_api_apis_cosisigsk8sio_v1alpha1_GCSProtocol(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.PolicyActions":           schema_api_apis_cosisigsk8sio_v1alpha1_PolicyActions(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.Protocol":                schema_api_apis_cosisigsk8sio_v1alpha1_Protocol(ref),
-		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.S3Protocol":              schema_api_apis_cosisigsk8sio_v1alpha1_S3Protocol(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.AnonymousAccessMode":       schema_api_apis_cosisigsk8sio_v1alpha1_AnonymousAccessMode(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.AzureProtocol":             schema_api_apis_cosisigsk8sio_v1alpha1_AzureProtocol(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.Bucket":                    schema_api_apis_cosisigsk8sio_v1alpha1_Bucket(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccess":              schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccess(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessClass":         schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessClass(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessClassList":     schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessClassList(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessList":          schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessList(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequest":       schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequest(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequestList":   schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequestList(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequestSpec":   schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequestSpec(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequestStatus": schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequestStatus(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessSpec":          schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessSpec(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessStatus":        schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessStatus(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketClass":               schema_api_apis_cosisigsk8sio_v1alpha1_BucketClass(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketClassList":           schema_api_apis_cosisigsk8sio_v1alpha1_BucketClassList(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketList":                schema_api_apis_cosisigsk8sio_v1alpha1_BucketList(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequest":             schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequest(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestBinding":      schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestBinding(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestList":         schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestList(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestSpec":         schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestSpec(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestStatus":       schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestStatus(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketSpec":                schema_api_apis_cosisigsk8sio_v1alpha1_BucketSpec(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketStatus":              schema_api_apis_cosisigsk8sio_v1alpha1_BucketStatus(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.GCSProtocol":               schema_api_apis_cosisigsk8sio_v1alpha1_GCSProtocol(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.NamespaceRef":              schema_api_apis_cosisigsk8sio_v1alpha1_NamespaceRef(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.PolicyActions":             schema_api_apis_cosisigsk8sio_v1alpha1_PolicyActions(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.Protocol":                  schema_api_apis_cosisigsk8sio_v1alpha1_Protocol(ref),
+		"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.S3Protocol":                schema_api_apis_cosisigsk8sio_v1alpha1_S3Protocol(ref),
 	}
 }
 
@@ -184,11 +187,17 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccess(ref common.ReferenceCal
 							Ref: ref("github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessSpec"),
 						},
 					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessStatus"),
+						},
+					},
 				},
+				Required: []string{"status"},
 			},
 		},
 		Dependencies: []string{
-			"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessSpec", "github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -390,11 +399,17 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequest(ref common.Refer
 							Ref: ref("github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequestSpec"),
 						},
 					},
+					"status": {
+						SchemaProps: spec.SchemaProps{
+							Ref: ref("github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequestStatus"),
+						},
+					},
 				},
+				Required: []string{"status"},
 			},
 		},
 		Dependencies: []string{
-			"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequestSpec", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequestSpec", "github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketAccessRequestStatus", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -462,7 +477,7 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequestSpec(ref common.R
 							Format: "",
 						},
 					},
-					"bucket": {
+					"bucketRequestName": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
@@ -474,7 +489,31 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequestSpec(ref common.R
 							Format: "",
 						},
 					},
-					"bucketAccessRequestName": {
+					"bucketAccessName": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
+func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequestStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"phase": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
@@ -542,6 +581,30 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessSpec(ref common.Referenc
 	}
 }
 
+func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessStatus(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"message": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"phase": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+			},
+		},
+	}
+}
+
 func schema_api_apis_cosisigsk8sio_v1alpha1_BucketClass(ref common.ReferenceCallback) common.OpenAPIDefinition {
 	return common.OpenAPIDefinition{
 		Schema: spec.Schema{
@@ -582,6 +645,23 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketClass(ref common.ReferenceCall
 					"additionalPermittedNamespaces": {
 						VendorExtensible: spec.VendorExtensible{
 							Extensions: spec.Extensions{
+								"x-kubernetes-list-type": "atomic",
+							},
+						},
+						SchemaProps: spec.SchemaProps{
+							Type: []string{"array"},
+							Items: &spec.SchemaOrArray{
+								Schema: &spec.Schema{
+									SchemaProps: spec.SchemaProps{
+										Ref: ref("github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.NamespaceRef"),
+									},
+								},
+							},
+						},
+					},
+					"supportedProtocols": {
+						VendorExtensible: spec.VendorExtensible{
+							Extensions: spec.Extensions{
 								"x-kubernetes-list-type": "set",
 							},
 						},
@@ -597,27 +677,10 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketClass(ref common.ReferenceCall
 							},
 						},
 					},
-					"supportedProtocols": {
-						VendorExtensible: spec.VendorExtensible{
-							Extensions: spec.Extensions{
-								"x-kubernetes-list-type": "atomic",
-							},
-						},
-						SchemaProps: spec.SchemaProps{
-							Type: []string{"array"},
-							Items: &spec.SchemaOrArray{
-								Schema: &spec.Schema{
-									SchemaProps: spec.SchemaProps{
-										Ref: ref("github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.Protocol"),
-									},
-								},
-							},
-						},
-					},
 					"anonymousAccessModes": {
 						VendorExtensible: spec.VendorExtensible{
 							Extensions: spec.Extensions{
-								"x-kubernetes-list-type": "set",
+								"x-kubernetes-list-type": "atomic",
 							},
 						},
 						SchemaProps: spec.SchemaProps{
@@ -656,7 +719,7 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketClass(ref common.ReferenceCall
 			},
 		},
 		Dependencies: []string{
-			"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.AnonymousAccessMode", "github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.Protocol", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
+			"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.AnonymousAccessMode", "github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.NamespaceRef", "k8s.io/apimachinery/pkg/apis/meta/v1.ObjectMeta"},
 	}
 }
 
@@ -872,19 +935,13 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketRequestSpec(ref common.Referen
 			SchemaProps: spec.SchemaProps{
 				Type: []string{"object"},
 				Properties: map[string]spec.Schema{
-					"bucket": {
+					"bucketName": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
 						},
 					},
 					"secretName": {
-						SchemaProps: spec.SchemaProps{
-							Type:   []string{"string"},
-							Format: "",
-						},
-					},
-					"provisioner": {
 						SchemaProps: spec.SchemaProps{
 							Type:   []string{"string"},
 							Format: "",
@@ -945,6 +1002,12 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketSpec(ref common.ReferenceCallb
 							Format: "",
 						},
 					},
+					"releasePolicy": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
 					"anonymousAccessMode": {
 						SchemaProps: spec.SchemaProps{
 							Ref: ref("github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.AnonymousAccessMode"),
@@ -959,7 +1022,7 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketSpec(ref common.ReferenceCallb
 					"permittedNamespaces": {
 						VendorExtensible: spec.VendorExtensible{
 							Extensions: spec.Extensions{
-								"x-kubernetes-list-type": "set",
+								"x-kubernetes-list-type": "atomic",
 							},
 						},
 						SchemaProps: spec.SchemaProps{
@@ -967,8 +1030,7 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketSpec(ref common.ReferenceCallb
 							Items: &spec.SchemaOrArray{
 								Schema: &spec.Schema{
 									SchemaProps: spec.SchemaProps{
-										Type:   []string{"string"},
-										Format: "",
+										Ref: ref("github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.NamespaceRef"),
 									},
 								},
 							},
@@ -994,11 +1056,11 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketSpec(ref common.ReferenceCallb
 						},
 					},
 				},
-				Required: []string{"provisioner", "protocol"},
+				Required: []string{"provisioner", "releasePolicy", "protocol"},
 			},
 		},
 		Dependencies: []string{
-			"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.AnonymousAccessMode", "github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.Protocol"},
+			"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.AnonymousAccessMode", "github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.NamespaceRef", "github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.Protocol"},
 	}
 }
 
@@ -1020,16 +1082,9 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketStatus(ref common.ReferenceCal
 							Format: "",
 						},
 					},
-					"boundBucketRequests": {
-						SchemaProps: spec.SchemaProps{
-							Ref: ref("github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestBinding"),
-						},
-					},
 				},
 			},
 		},
-		Dependencies: []string{
-			"github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1.BucketRequestBinding"},
 	}
 }
 
@@ -1064,6 +1119,31 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_GCSProtocol(ref common.ReferenceCall
 						},
 					},
 				},
+			},
+		},
+	}
+}
+
+func schema_api_apis_cosisigsk8sio_v1alpha1_NamespaceRef(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+				Properties: map[string]spec.Schema{
+					"name": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+					"uid": {
+						SchemaProps: spec.SchemaProps{
+							Type:   []string{"string"},
+							Format: "",
+						},
+					},
+				},
+				Required: []string{"name", "uid"},
 			},
 		},
 	}

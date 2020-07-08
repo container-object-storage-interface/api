@@ -13,7 +13,7 @@ defaulter-gen --input-dirs github.com/container-object-storage-interface/api/api
 	      --output-base $GOPATH/src \
 	      --output-package github.com/container-object-storage-interface/api/defaulters
 
-controller-gen crd paths=./apis/... output:crd:artifacts:config=./config/crd/bases
+controller-gen crd:crdVersions=v1 paths=./apis/...
 
 #client-gen --input cosi.sigs.k8s.io/v1alpha1 \
 #	   --input-base github.com/container-object-storage-interface/api/apis/ \
