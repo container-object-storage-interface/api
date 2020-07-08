@@ -1,0 +1,66 @@
+
+---
+apiVersion: apiextensions.k8s.io/v1
+kind: CustomResourceDefinition
+metadata:
+  annotations:
+    controller-gen.kubebuilder.io/version: v0.2.4
+    api-approved.kubernetes.io: "https://github.com/kubernetes/enhancements/pull/1383"
+  creationTimestamp: null
+  name: bucketRequests.cosi.sigs.k8s.io
+spec:
+  group: cosi.sigs.k8s.io
+  names:
+    kind: BucketRequest
+    listKind: BucketRequestList
+    plural: bucketRequests
+    singular: bucketrequest
+  scope: Namespaced
+  versions:
+  - name: v1alpha1
+    schema:
+      openAPIV3Schema:
+        properties:
+          apiVersion:
+            description: 'APIVersion defines the versioned schema of this representation
+              of an object. Servers should convert recognized schemas to the latest
+              internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
+            type: string
+          kind:
+            description: 'Kind is a string value representing the REST resource this
+              object represents. Servers may infer this from the endpoint the client
+              submits requests to. Cannot be updated. In CamelCase. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#types-kinds'
+            type: string
+          metadata:
+            type: object
+          spec:
+            properties:
+              bucketClassName:
+                type: string
+              bucketName:
+                type: string
+              bucketPrefix:
+                type: string
+              protocol:
+                type: string
+              secretName:
+                type: string
+            required:
+            - protocol
+            type: object
+          status:
+            properties:
+              phase:
+                type: string
+            type: object
+        type: object
+    served: true
+    storage: true
+    subresources:
+      status: {}
+status:
+  acceptedNames:
+    kind: ""
+    plural: ""
+  conditions: []
+  storedVersions: []
