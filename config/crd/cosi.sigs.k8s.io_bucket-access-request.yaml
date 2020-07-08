@@ -5,17 +5,17 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.2.4
-    api-approved.kubernetes.io: "https://github.com/kubernetes/enhancements/pull/1383"
+    api-approved.kubernetes.io: https://github.com/kubernetes/enhancements/pull/1383
   creationTimestamp: null
-  name: bucketAccesses.cosi.sigs.k8s.io
+  name: bucket-access-request.cosi.sigs.k8s.io
 spec:
   group: cosi.sigs.k8s.io
   names:
-    kind: BucketAccess
-    listKind: BucketAccessList
-    plural: bucketAccesses
-    singular: bucketaccess
-  scope: Cluster
+    kind: BucketAccessRequest
+    listKind: BucketAccessRequestList
+    plural: bucket-access-request
+    singular: bucketaccessrequest
+  scope: Namespaced
   versions:
   - name: v1alpha1
     schema:
@@ -35,17 +35,13 @@ spec:
             type: object
           spec:
             properties:
-              bucketAccessRequestName:
+              accessSecretName:
                 type: string
-              bucketAccessRequestNamespace:
+              bucketAccessClassName:
                 type: string
-              keySecretName:
+              bucketAccessName:
                 type: string
-              parameters:
-                additionalProperties:
-                  type: string
-                type: object
-              provisioner:
+              bucketRequestName:
                 type: string
               serviceAccountName:
                 type: string

@@ -5,17 +5,17 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.2.4
-    api-approved.kubernetes.io: "https://github.com/kubernetes/enhancements/pull/1383"
+    api-approved.kubernetes.io: https://github.com/kubernetes/enhancements/pull/1383
   creationTimestamp: null
-  name: bucketClasses.cosi.sigs.k8s.io
+  name: bucket-class.cosi.sigs.k8s.io
 spec:
   group: cosi.sigs.k8s.io
   names:
     kind: BucketClass
     listKind: BucketClassList
-    plural: bucketClasses
+    plural: bucket-class
     singular: bucketclass
-  scope: Cluster
+  scope: Namespaced
   versions:
   - name: v1alpha1
     schema:

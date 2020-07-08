@@ -80,6 +80,7 @@ const (
 // +kubebuilder:resource:scope=Namespaced,path=bucketRequests
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
+// +kubebuilder:resource:path=bucket-request
 
 type BucketRequest struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -103,6 +104,7 @@ type BucketRequestList struct {
 // +kubebuilder:resource:scope=Cluster,path=buckets
 // +kubebuilder:storageversion
 // +kubebuilder:subresource:status
+// +kubebuilder:resource:path=bucket
 
 type Bucket struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -125,6 +127,7 @@ type BucketList struct {
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:resource:scope=Cluster,path=bucketClasses
 // +kubebuilder:storageversion
+// +kubebuilder:resource:path=bucket-class
 
 type BucketClass struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -169,6 +172,7 @@ type PolicyActions struct {
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:resource:scope=Cluster,path=bucketAccessClasses
 // +kubebuilder:storageversion
+// +kubebuilder:resource:path=bucket-access-class
 
 type BucketAccessClass struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -218,6 +222,7 @@ type BucketAccessStatus struct {
 // +kubebuilder:resource:scope=Cluster,path=bucketAccesses
 // +kubebuilder:storageversion
 // +kubebuilder:subresource:status
+// +kubebuilder:resource:path=bucket-access
 
 type BucketAccess struct {
 	metav1.TypeMeta   `json:",inline"`
@@ -259,6 +264,7 @@ type BucketAccessRequestStatus struct {
 // +kubebuilder:resource:scope=Namespaced,path=bucketAccessRequests
 // +kubebuilder:storageversion
 // +kubebuilder:subresource:status
+// +kubebuilder:resource:path=bucket-access-request
 
 type BucketAccessRequest struct {
 	metav1.TypeMeta   `json:",inline"`

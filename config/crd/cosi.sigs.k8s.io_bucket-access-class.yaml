@@ -5,16 +5,16 @@ kind: CustomResourceDefinition
 metadata:
   annotations:
     controller-gen.kubebuilder.io/version: v0.2.4
-    api-approved.kubernetes.io: "https://github.com/kubernetes/enhancements/pull/1383"
+    api-approved.kubernetes.io: https://github.com/kubernetes/enhancements/pull/1383
   creationTimestamp: null
-  name: bucketRequests.cosi.sigs.k8s.io
+  name: bucket-access-class.cosi.sigs.k8s.io
 spec:
   group: cosi.sigs.k8s.io
   names:
-    kind: BucketRequest
-    listKind: BucketRequestList
-    plural: bucketRequests
-    singular: bucketrequest
+    kind: BucketAccessClass
+    listKind: BucketAccessClassList
+    plural: bucket-access-class
+    singular: bucketaccessclass
   scope: Namespaced
   versions:
   - name: v1alpha1
@@ -33,31 +33,30 @@ spec:
             type: string
           metadata:
             type: object
-          spec:
-            properties:
-              bucketClassName:
-                type: string
-              bucketName:
-                type: string
-              bucketPrefix:
-                type: string
-              protocol:
-                type: string
-              secretName:
-                type: string
-            required:
-            - protocol
+          parameters:
+            additionalProperties:
+              type: string
             type: object
-          status:
+          policyActions:
             properties:
-              phase:
-                type: string
+              allow:
+                items:
+                  type: string
+                type: array
+              deny:
+                items:
+                  type: string
+                type: array
             type: object
+          provisioner:
+            type: string
+          supportedProtocols:
+            items:
+              type: string
+            type: array
         type: object
     served: true
     storage: true
-    subresources:
-      status: {}
 status:
   acceptedNames:
     kind: ""
