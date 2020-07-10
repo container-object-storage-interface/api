@@ -7,15 +7,15 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.2.4
     api-approved.kubernetes.io: https://github.com/kubernetes/enhancements/pull/1383
   creationTimestamp: null
-  name: bucket-access-class.cosi.sigs.k8s.io
+  name: bucketaccessclasses.cosi.sigs.k8s.io
 spec:
   group: cosi.sigs.k8s.io
   names:
     kind: BucketAccessClass
     listKind: BucketAccessClassList
-    plural: bucket-access-class
+    plural: bucketaccessclasses
     singular: bucketaccessclass
-  scope: Namespaced
+  scope: Cluster
   versions:
   - name: v1alpha1
     schema:

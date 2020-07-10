@@ -193,7 +193,6 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccess(ref common.ReferenceCal
 						},
 					},
 				},
-				Required: []string{"status"},
 			},
 		},
 		Dependencies: []string{
@@ -405,7 +404,6 @@ func schema_api_apis_cosisigsk8sio_v1alpha1_BucketAccessRequest(ref common.Refer
 						},
 					},
 				},
-				Required: []string{"status"},
 			},
 		},
 		Dependencies: []string{
