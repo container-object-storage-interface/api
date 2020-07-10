@@ -77,16 +77,17 @@ const (
 
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-// +kubebuilder:resource:scope=Namespaced,path=bucketRequests
+// +kubebuilder:resource:scope=Namespaced
 // +kubebuilder:subresource:status
 // +kubebuilder:storageversion
-// +kubebuilder:resource:path=bucket-request
 
 type BucketRequest struct {
 	metav1.TypeMeta   `json:",inline"`
+	// +optional
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	Spec   BucketRequestSpec   `json:"spec,omitempty"`
+	// +optional
 	Status BucketRequestStatus `json:"status,omitempty"`
 }
 
@@ -101,16 +102,17 @@ type BucketRequestList struct {
 // +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-// +kubebuilder:resource:scope=Cluster,path=buckets
+// +kubebuilder:resource:scope=Cluster
 // +kubebuilder:storageversion
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:path=bucket
 
 type Bucket struct {
 	metav1.TypeMeta   `json:",inline"`
+	// +optional
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	Spec   BucketSpec   `json:"spec,omitempty"`
+	// +optional
 	Status BucketStatus `json:"status,omitempty"`
 }
 
@@ -125,12 +127,12 @@ type BucketList struct {
 // +genclient
 // +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-// +kubebuilder:resource:scope=Cluster,path=bucketClasses
+// +kubebuilder:resource:scope=Cluster
 // +kubebuilder:storageversion
-// +kubebuilder:resource:path=bucket-class
 
 type BucketClass struct {
 	metav1.TypeMeta   `json:",inline"`
+	// +optional
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	Provisioner string `json:"provisioner,omitempty"`
@@ -170,12 +172,12 @@ type PolicyActions struct {
 // +genclient
 // +genclient:noStatus
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-// +kubebuilder:resource:scope=Cluster,path=bucketAccessClasses
+// +kubebuilder:resource:scope=Cluster
 // +kubebuilder:storageversion
-// +kubebuilder:resource:path=bucket-access-class
 
 type BucketAccessClass struct {
 	metav1.TypeMeta   `json:",inline"`
+	// +optional
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	Provisioner   string        `json:"provisioner,omitempty"`
@@ -219,16 +221,17 @@ type BucketAccessStatus struct {
 
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-// +kubebuilder:resource:scope=Cluster,path=bucketAccesses
+// +kubebuilder:resource:scope=Cluster
 // +kubebuilder:storageversion
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:path=bucket-access
 
 type BucketAccess struct {
 	metav1.TypeMeta   `json:",inline"`
+	// +optional
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	Spec BucketAccessSpec `json:"spec,omitempty"`
+	// +optional
 	Status BucketAccessStatus `json:"status"`
 }
 
@@ -261,16 +264,17 @@ type BucketAccessRequestStatus struct {
 
 // +genclient
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
-// +kubebuilder:resource:scope=Namespaced,path=bucketAccessRequests
+// +kubebuilder:resource:scope=Namespaced
 // +kubebuilder:storageversion
 // +kubebuilder:subresource:status
-// +kubebuilder:resource:path=bucket-access-request
 
 type BucketAccessRequest struct {
 	metav1.TypeMeta   `json:",inline"`
+	// +optional
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
 	Spec BucketAccessRequestSpec `json:"spec,omitempty"`
+	// +optional
 	Status BucketAccessRequestStatus `json:"status"`
 }
 

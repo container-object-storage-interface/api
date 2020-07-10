@@ -7,51 +7,25 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.2.4
     api-approved.kubernetes.io: https://github.com/kubernetes/enhancements/pull/1383
   creationTimestamp: null
-  name: bucket-class.cosi.sigs.k8s.io
+  name: bucketaccesses.cosi.sigs.k8s.io
 spec:
   group: cosi.sigs.k8s.io
   names:
-    kind: BucketClass
-    listKind: BucketClassList
-    plural: bucket-class
-    singular: bucketclass
-  scope: Namespaced
+    kind: BucketAccess
+    listKind: BucketAccessList
+    plural: bucketaccesses
+    singular: bucketaccess
+  scope: Cluster
   versions:
   - name: v1alpha1
     schema:
       openAPIV3Schema:
         properties:
-          additionalPermittedNamespaces:
-            items:
-              properties:
-                name:
-                  type: string
-                uid:
-                  type: string
-              required:
-              - name
-              - uid
-              type: object
-            type: array
-          anonymousAccessModes:
-            items:
-              properties:
-                private:
-                  type: boolean
-                publicReadOnly:
-                  type: boolean
-                publicReadWrite:
-                  type: boolean
-              type: object
-            type: array
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
               of an object. Servers should convert recognized schemas to the latest
               internal value, and may reject unrecognized values. More info: https://git.k8s.io/community/contributors/devel/sig-architecture/api-conventions.md#resources'
             type: string
-          isDefaultBucketClass:
-            default: false
-            type: boolean
           kind:
             description: 'Kind is a string value representing the REST resource this
               object represents. Servers may infer this from the endpoint the client
@@ -59,24 +33,35 @@ spec:
             type: string
           metadata:
             type: object
-          parameters:
-            additionalProperties:
-              type: string
+          spec:
+            properties:
+              bucketAccessRequestName:
+                type: string
+              bucketAccessRequestNamespace:
+                type: string
+              keySecretName:
+                type: string
+              parameters:
+                additionalProperties:
+                  type: string
+                type: object
+              provisioner:
+                type: string
+              serviceAccountName:
+                type: string
             type: object
-          provisioner:
-            type: string
-          releasePolicy:
-            default: retain
-            type: string
-          supportedProtocols:
-            items:
-              type: string
-            type: array
-        required:
-        - supportedProtocols
+          status:
+            properties:
+              message:
+                type: string
+              phase:
+                type: string
+            type: object
         type: object
     served: true
     storage: true
+    subresources:
+      status: {}
 status:
   acceptedNames:
     kind: ""

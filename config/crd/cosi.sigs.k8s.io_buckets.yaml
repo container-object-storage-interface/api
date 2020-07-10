@@ -7,15 +7,15 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.2.4
     api-approved.kubernetes.io: https://github.com/kubernetes/enhancements/pull/1383
   creationTimestamp: null
-  name: bucket.cosi.sigs.k8s.io
+  name: buckets.cosi.sigs.k8s.io
 spec:
   group: cosi.sigs.k8s.io
   names:
     kind: Bucket
     listKind: BucketList
-    plural: bucket
+    plural: buckets
     singular: bucket
-  scope: Namespaced
+  scope: Cluster
   versions:
   - name: v1alpha1
     schema:

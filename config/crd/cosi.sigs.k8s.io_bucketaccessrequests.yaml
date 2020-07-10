@@ -7,14 +7,14 @@ metadata:
     controller-gen.kubebuilder.io/version: v0.2.4
     api-approved.kubernetes.io: https://github.com/kubernetes/enhancements/pull/1383
   creationTimestamp: null
-  name: bucket-request.cosi.sigs.k8s.io
+  name: bucketaccessrequests.cosi.sigs.k8s.io
 spec:
   group: cosi.sigs.k8s.io
   names:
-    kind: BucketRequest
-    listKind: BucketRequestList
-    plural: bucket-request
-    singular: bucketrequest
+    kind: BucketAccessRequest
+    listKind: BucketAccessRequestList
+    plural: bucketaccessrequests
+    singular: bucketaccessrequest
   scope: Namespaced
   versions:
   - name: v1alpha1
@@ -35,21 +35,21 @@ spec:
             type: object
           spec:
             properties:
-              bucketClassName:
+              accessSecretName:
                 type: string
-              bucketName:
+              bucketAccessClassName:
                 type: string
-              bucketPrefix:
+              bucketAccessName:
                 type: string
-              protocol:
+              bucketRequestName:
                 type: string
-              secretName:
+              serviceAccountName:
                 type: string
-            required:
-            - protocol
             type: object
           status:
             properties:
+              message:
+                type: string
               phase:
                 type: string
             type: object
