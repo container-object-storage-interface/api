@@ -40,6 +40,7 @@ type BucketAccessesGetter interface {
 type BucketAccessInterface interface {
 	Create(ctx context.Context, bucketAccess *v1alpha1.BucketAccess, opts v1.CreateOptions) (*v1alpha1.BucketAccess, error)
 	Update(ctx context.Context, bucketAccess *v1alpha1.BucketAccess, opts v1.UpdateOptions) (*v1alpha1.BucketAccess, error)
+	UpdateStatus(ctx context.Context, bucketAccess *v1alpha1.BucketAccess, opts v1.UpdateOptions) (*v1alpha1.BucketAccess, error)
 	Delete(ctx context.Context, name string, opts v1.DeleteOptions) error
 	DeleteCollection(ctx context.Context, opts v1.DeleteOptions, listOpts v1.ListOptions) error
 	Get(ctx context.Context, name string, opts v1.GetOptions) (*v1alpha1.BucketAccess, error)
@@ -121,6 +122,21 @@ func (c *bucketAccesses) Update(ctx context.Context, bucketAccess *v1alpha1.Buck
 	err = c.client.Put().
 		Resource("bucketaccesses").
 		Name(bucketAccess.Name).
+		VersionedParams(&opts, scheme.ParameterCodec).
+		Body(bucketAccess).
+		Do(ctx).
+		Into(result)
+	return
+}
+
+// UpdateStatus was generated because the type contains a Status member.
+// Add a +genclient:noStatus comment above the type to avoid generating UpdateStatus().
+func (c *bucketAccesses) UpdateStatus(ctx context.Context, bucketAccess *v1alpha1.BucketAccess, opts v1.UpdateOptions) (result *v1alpha1.BucketAccess, err error) {
+	result = &v1alpha1.BucketAccess{}
+	err = c.client.Put().
+		Resource("bucketaccesses").
+		Name(bucketAccess.Name).
+		SubResource("status").
 		VersionedParams(&opts, scheme.ParameterCodec).
 		Body(bucketAccess).
 		Do(ctx).

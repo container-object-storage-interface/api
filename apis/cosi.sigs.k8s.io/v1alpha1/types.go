@@ -119,6 +119,7 @@ type BucketList struct {
 
 // +genclient
 // +genclient:nonNamespaced
+// +genclient:noStatus
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:resource:scope=Cluster
 // +kubebuilder:storageversion
@@ -154,6 +155,7 @@ type BucketClassList struct {
 }
 
 // +genclient
+// +genclient:nonNamespaced
 // +genclient:noStatus
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:resource:scope=Cluster
@@ -205,6 +207,7 @@ type BucketAccessStatus struct {
 }
 
 // +genclient
+// +genclient:nonNamespaced
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
 // +kubebuilder:resource:scope=Cluster
 // +kubebuilder:storageversion
