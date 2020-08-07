@@ -20,6 +20,7 @@ lister-gen --input-dirs github.com/container-object-storage-interface/api/apis/c
 informer-gen --input-dirs github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1 \
 	      --output-base $GOPATH/src \
 	      --listers-package github.com/container-object-storage-interface/api/listers \
+	      --versioned-clientset-package github.com/container-object-storage-interface/api/clientset \
 	      --output-package github.com/container-object-storage-interface/api/informers
 
 

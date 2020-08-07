@@ -23,13 +23,13 @@ import (
 	sync "sync"
 	time "time"
 
+	clientset "github.com/container-object-storage-interface/api/clientset"
 	cosisigsk8sio "github.com/container-object-storage-interface/api/informers/externalversions/cosi.sigs.k8s.io"
 	internalinterfaces "github.com/container-object-storage-interface/api/informers/externalversions/internalinterfaces"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
-	clientset "k8s.io/kubernetes/pkg/client/clientset_generated/clientset"
 )
 
 // SharedInformerOption defines the functional option type for SharedInformerFactory.
