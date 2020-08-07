@@ -24,12 +24,12 @@ import (
 
 	cosisigsk8siov1alpha1 "github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1"
 	internalinterfaces "github.com/container-object-storage-interface/api/informers/externalversions/internalinterfaces"
+	v1alpha1 "github.com/container-object-storage-interface/api/listers/cosi.sigs.k8s.io/v1alpha1"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	watch "k8s.io/apimachinery/pkg/watch"
 	cache "k8s.io/client-go/tools/cache"
 	clientset "k8s.io/kubernetes/pkg/client/clientset_generated/clientset"
-	v1alpha1 "k8s.io/kubernetes/pkg/client/listers/cosi.sigs.k8s.io/v1alpha1"
 )
 
 // BucketAccessInformer provides access to a shared informer and lister for
