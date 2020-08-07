@@ -4,8 +4,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.2.4
-    api-approved.kubernetes.io: https://github.com/kubernetes/enhancements/pull/1383
+    controller-gen.kubebuilder.io/version: (devel)
   creationTimestamp: null
   name: bucketclasses.cosi.sigs.k8s.io
 spec:
@@ -21,18 +20,11 @@ spec:
     schema:
       openAPIV3Schema:
         properties:
-          additionalPermittedNamespaces:
+          allowedNamespaces:
             items:
-              properties:
-                name:
-                  type: string
-                uid:
-                  type: string
-              required:
-              - name
-              - uid
-              type: object
+              type: string
             type: array
+            x-kubernetes-list-type: atomic
           anonymousAccessModes:
             items:
               properties:
@@ -42,8 +34,11 @@ spec:
                   type: boolean
                 publicReadWrite:
                   type: boolean
+                publicWriteOnly:
+                  type: boolean
               type: object
             type: array
+            x-kubernetes-list-type: atomic
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
               of an object. Servers should convert recognized schemas to the latest
@@ -63,17 +58,13 @@ spec:
             additionalProperties:
               type: string
             type: object
+          protocol:
+            type: string
           provisioner:
             type: string
           releasePolicy:
             default: retain
             type: string
-          supportedProtocols:
-            items:
-              type: string
-            type: array
-        required:
-        - supportedProtocols
         type: object
     served: true
     storage: true
@@ -81,5 +72,5 @@ status:
   acceptedNames:
     kind: ""
     plural: ""
-  conditions: []
-  storedVersions: []
+  conditions: null
+  storedVersions: null

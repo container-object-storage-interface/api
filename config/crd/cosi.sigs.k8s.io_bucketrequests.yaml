@@ -4,8 +4,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.2.4
-    api-approved.kubernetes.io: https://github.com/kubernetes/enhancements/pull/1383
+    controller-gen.kubebuilder.io/version: (devel)
   creationTimestamp: null
   name: bucketrequests.cosi.sigs.k8s.io
 spec:
@@ -37,20 +36,20 @@ spec:
             properties:
               bucketClassName:
                 type: string
-              bucketName:
+              bucketInstanceName:
                 type: string
               bucketPrefix:
                 type: string
               protocol:
-                type: string
-              secretName:
                 type: string
             required:
             - protocol
             type: object
           status:
             properties:
-              phase:
+              bucketAvailable:
+                type: boolean
+              message:
                 type: string
             type: object
         type: object
@@ -62,5 +61,5 @@ status:
   acceptedNames:
     kind: ""
     plural: ""
-  conditions: []
-  storedVersions: []
+  conditions: null
+  storedVersions: null

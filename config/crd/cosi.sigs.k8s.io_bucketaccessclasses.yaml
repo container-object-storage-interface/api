@@ -4,8 +4,7 @@ apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
   annotations:
-    controller-gen.kubebuilder.io/version: v0.2.4
-    api-approved.kubernetes.io: https://github.com/kubernetes/enhancements/pull/1383
+    controller-gen.kubebuilder.io/version: (devel)
   creationTimestamp: null
   name: bucketaccessclasses.cosi.sigs.k8s.io
 spec:
@@ -38,22 +37,9 @@ spec:
               type: string
             type: object
           policyActions:
-            properties:
-              allow:
-                items:
-                  type: string
-                type: array
-              deny:
-                items:
-                  type: string
-                type: array
-            type: object
+            type: string
           provisioner:
             type: string
-          supportedProtocols:
-            items:
-              type: string
-            type: array
         type: object
     served: true
     storage: true
@@ -61,5 +47,5 @@ status:
   acceptedNames:
     kind: ""
     plural: ""
-  conditions: []
-  storedVersions: []
+  conditions: null
+  storedVersions: null
