@@ -1,0 +1,18 @@
+apiVersion: objectstorage.k8s.io/v1alpha1
+kind: Bucket
+metadata:
+  name: bucket1
+spec:
+  provisioner: example.provisioner.com
+  protocol:
+    protocolSignature: s3
+  releasePolicy: Retain
+
+---
+
+apiVersion: objectstorage.k8s.io/v1alpha1
+kind: BucketAccess
+metadata:
+  name: bucketaccess1
+spec:
+  bucketAccessRequestName: bar1

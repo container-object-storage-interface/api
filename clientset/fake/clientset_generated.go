@@ -20,8 +20,8 @@ package fake
 
 import (
 	clientset "github.com/container-object-storage-interface/api/clientset"
-	cosiv1alpha1 "github.com/container-object-storage-interface/api/clientset/typed/cosi.sigs.k8s.io/v1alpha1"
-	fakecosiv1alpha1 "github.com/container-object-storage-interface/api/clientset/typed/cosi.sigs.k8s.io/v1alpha1/fake"
+	objectstoragev1alpha1 "github.com/container-object-storage-interface/api/clientset/typed/objectstorage.k8s.io/v1alpha1"
+	fakeobjectstoragev1alpha1 "github.com/container-object-storage-interface/api/clientset/typed/objectstorage.k8s.io/v1alpha1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -76,7 +76,7 @@ func (c *Clientset) Tracker() testing.ObjectTracker {
 
 var _ clientset.Interface = &Clientset{}
 
-// CosiV1alpha1 retrieves the CosiV1alpha1Client
-func (c *Clientset) CosiV1alpha1() cosiv1alpha1.CosiV1alpha1Interface {
-	return &fakecosiv1alpha1.FakeCosiV1alpha1{Fake: &c.Fake}
+// ObjectstorageV1alpha1 retrieves the ObjectstorageV1alpha1Client
+func (c *Clientset) ObjectstorageV1alpha1() objectstoragev1alpha1.ObjectstorageV1alpha1Interface {
+	return &fakeobjectstoragev1alpha1.FakeObjectstorageV1alpha1{Fake: &c.Fake}
 }
