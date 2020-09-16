@@ -21,7 +21,7 @@ package externalversions
 import (
 	"fmt"
 
-	v1alpha1 "github.com/container-object-storage-interface/api/apis/cosi.sigs.k8s.io/v1alpha1"
+	v1alpha1 "github.com/container-object-storage-interface/api/apis/objectstorage.k8s.io/v1alpha1"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
 	cache "k8s.io/client-go/tools/cache"
 )
@@ -52,19 +52,19 @@ func (f *genericInformer) Lister() cache.GenericLister {
 // TODO extend this to unknown resources with a client pool
 func (f *sharedInformerFactory) ForResource(resource schema.GroupVersionResource) (GenericInformer, error) {
 	switch resource {
-	// Group=cosi.sigs.k8s.io, Version=v1alpha1
+	// Group=objectstorage.k8s.io, Version=v1alpha1
 	case v1alpha1.SchemeGroupVersion.WithResource("buckets"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Cosi().V1alpha1().Buckets().Informer()}, nil
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Objectstorage().V1alpha1().Buckets().Informer()}, nil
 	case v1alpha1.SchemeGroupVersion.WithResource("bucketaccesses"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Cosi().V1alpha1().BucketAccesses().Informer()}, nil
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Objectstorage().V1alpha1().BucketAccesses().Informer()}, nil
 	case v1alpha1.SchemeGroupVersion.WithResource("bucketaccessclasses"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Cosi().V1alpha1().BucketAccessClasses().Informer()}, nil
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Objectstorage().V1alpha1().BucketAccessClasses().Informer()}, nil
 	case v1alpha1.SchemeGroupVersion.WithResource("bucketaccessrequests"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Cosi().V1alpha1().BucketAccessRequests().Informer()}, nil
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Objectstorage().V1alpha1().BucketAccessRequests().Informer()}, nil
 	case v1alpha1.SchemeGroupVersion.WithResource("bucketclasses"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Cosi().V1alpha1().BucketClasses().Informer()}, nil
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Objectstorage().V1alpha1().BucketClasses().Informer()}, nil
 	case v1alpha1.SchemeGroupVersion.WithResource("bucketrequests"):
-		return &genericInformer{resource: resource.GroupResource(), informer: f.Cosi().V1alpha1().BucketRequests().Informer()}, nil
+		return &genericInformer{resource: resource.GroupResource(), informer: f.Objectstorage().V1alpha1().BucketRequests().Informer()}, nil
 
 	}
 

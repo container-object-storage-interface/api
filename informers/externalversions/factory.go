@@ -24,8 +24,8 @@ import (
 	time "time"
 
 	clientset "github.com/container-object-storage-interface/api/clientset"
-	cosisigsk8sio "github.com/container-object-storage-interface/api/informers/externalversions/cosi.sigs.k8s.io"
 	internalinterfaces "github.com/container-object-storage-interface/api/informers/externalversions/internalinterfaces"
+	objectstoragek8sio "github.com/container-object-storage-interface/api/informers/externalversions/objectstorage.k8s.io"
 	v1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	runtime "k8s.io/apimachinery/pkg/runtime"
 	schema "k8s.io/apimachinery/pkg/runtime/schema"
@@ -172,9 +172,9 @@ type SharedInformerFactory interface {
 	ForResource(resource schema.GroupVersionResource) (GenericInformer, error)
 	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
 
-	Cosi() cosisigsk8sio.Interface
+	Objectstorage() objectstoragek8sio.Interface
 }
 
-func (f *sharedInformerFactory) Cosi() cosisigsk8sio.Interface {
-	return cosisigsk8sio.New(f, f.namespace, f.tweakListOptions)
+func (f *sharedInformerFactory) Objectstorage() objectstoragek8sio.Interface {
+	return objectstoragek8sio.New(f, f.namespace, f.tweakListOptions)
 }
