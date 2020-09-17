@@ -36,7 +36,7 @@ import (
 	"github.com/spf13/viper"
 )
 
-type controller struct {
+type Controller struct {
 	LeaseDuration time.Duration
 	RenewDeadline time.Duration
 	RetryPeriod   time.Duration
@@ -62,7 +62,7 @@ type controller struct {
 	kubeClient   kubeclientset.Interface
 }
 
-func New(identity string, leaderLockName string) (*controller, error) {
+func New(identity string, leaderLockName string) (*Controller, error) {
 	cfg, err := func() (*rest.Config, error) {
 		kubeConfig := viper.GetString("kube-config")
 
@@ -92,7 +92,7 @@ func New(identity string, leaderLockName string) (*controller, error) {
 		}
 	}
 
-	return &controller{
+	return &Controller{
 		identity:     id,
 		kubeClient:   kubeClient,
 		bucketClient: bucketClient,
@@ -107,7 +107,7 @@ func New(identity string, leaderLockName string) (*controller, error) {
 }
 
 // Run - runs the controller. Note that ctx must be cancellable i.e. ctx.Done() should not return nil
-func (c *controller) Run(ctx context.Context) error {
+func (c *Controller) Run(ctx context.Context) error {
 	if !c.initialized {
 		fmt.Errorf("Uninitialized controller. Atleast 1 listener should be added")
 	}
@@ -172,7 +172,7 @@ func (c *controller) Run(ctx context.Context) error {
 	return nil // should never reach here
 }
 
-func (c *controller) runController(ctx context.Context) {
+func (c *Controller) runController(ctx context.Context) {
 	type addFunc func(ctx context.Context, obj interface{}) error
 	type updateFunc func(ctx context.Context, old, new interface{}) error
 	type deleteFunc func(ctx context.Context, obj interface{}) error

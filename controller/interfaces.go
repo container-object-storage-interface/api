@@ -25,7 +25,7 @@ type BucketListener interface {
 	Delete(ctx context.Context, b *v1alpha1.Bucket) error
 }
 
-func (c *controller) AddBucketListener(b BucketListener) {
+func (c *Controller) AddBucketListener(b BucketListener) {
 	c.initialized = true
 	c.BucketListener = b
 }
@@ -38,7 +38,7 @@ type BucketClassListener interface {
 	Delete(ctx context.Context, b *v1alpha1.BucketClass) error
 }
 
-func (c *controller) AddBucketClassListener(b BucketClassListener) {
+func (c *Controller) AddBucketClassListener(b BucketClassListener) {
 	c.initialized = true
 	c.BucketClassListener = b
 }
@@ -51,7 +51,7 @@ type BucketRequestListener interface {
 	Delete(ctx context.Context, b *v1alpha1.BucketRequest) error
 }
 
-func (c *controller) AddBucketRequestListener(b BucketRequestListener) {
+func (c *Controller) AddBucketRequestListener(b BucketRequestListener) {
 	c.initialized = true
 	c.BucketRequestListener = b
 }
@@ -64,7 +64,7 @@ type BucketAccessListener interface {
 	Delete(ctx context.Context, b *v1alpha1.BucketAccess) error
 }
 
-func (c *controller) AddBucketAccessListener(b BucketAccessListener) {
+func (c *Controller) AddBucketAccessListener(b BucketAccessListener) {
 	c.initialized = true
 	c.BucketAccessListener = b
 }
@@ -77,7 +77,7 @@ type BucketAccessClassListener interface {
 	Delete(ctx context.Context, b *v1alpha1.BucketAccessClass) error
 }
 
-func (c *controller) AddBucketAccessClassListener(b BucketAccessClassListener) {
+func (c *Controller) AddBucketAccessClassListener(b BucketAccessClassListener) {
 	c.initialized = true
 	c.BucketAccessClassListener = b
 }
@@ -90,7 +90,7 @@ type BucketAccessRequestListener interface {
 	Delete(ctx context.Context, b *v1alpha1.BucketAccessRequest) error
 }
 
-func (c *controller) AddBucketAccessRequestListener(b BucketAccessRequestListener) {
+func (c *Controller) AddBucketAccessRequestListener(b BucketAccessRequestListener) {
 	c.initialized = true
 	c.BucketAccessRequestListener = b
 }
