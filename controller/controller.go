@@ -196,21 +196,21 @@ func (c *Controller) runController(ctx context.Context) {
 					switch d.Type {
 					case cache.Sync, cache.Replaced, cache.Added, cache.Updated:
 						if old, exists, err := indexer.Get(d.Object); err == nil && exists {
-							if err := indexer.Update(d.Object); err != nil {
+							if err := update(ctx, old, d.Object); err != nil {
 								return err
 							}
-							return update(ctx, old, d.Object)
+							return indexer.Update(d.Object)
 						} else {
-							if err := indexer.Add(d.Object); err != nil {
+							if err := add(ctx, d.Object); err != nil {
 								return err
 							}
-							return add(ctx, d.Object)
+							return indexer.Add(d.Object)
 						}
 					case cache.Deleted:
-						if err := indexer.Delete(d.Object); err != nil {
+						if err := delete(ctx, d.Object); err != nil {
 							return err
 						}
-						return delete(ctx, d.Object)
+						return indexer.Delete(d.Object)
 					}
 				}
 				return nil
