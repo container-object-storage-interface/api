@@ -7,9 +7,12 @@ import (
 	"os"
 	"regexp"
 	"strings"
+	"sync"
 	"time"
 
-	// storage
+	"golang.org/x/time/rate"
+
+	// objectstorage
 	v1alpha1 "github.com/container-object-storage-interface/api/apis/objectstorage.k8s.io/v1alpha1"
 	bucketclientset "github.com/container-object-storage-interface/api/clientset"
 
@@ -45,18 +48,36 @@ type deleteFunc func(ctx context.Context, obj interface{}) error
 
 type addOp struct {
 	Object  interface{}
-	AddFunc addFunc
+	AddFunc *addFunc
+
+	Key string
+}
+
+func (a addOp) String() string {
+	return a.Key
 }
 
 type updateOp struct {
 	OldObject  interface{}
 	NewObject  interface{}
-	UpdateFunc updateFunc
+	UpdateFunc *updateFunc
+
+	Key string
+}
+
+func (u updateOp) String() string {
+	return u.Key
 }
 
 type deleteOp struct {
 	Object     interface{}
-	DeleteFunc deleteFunc
+	DeleteFunc *deleteFunc
+
+	Key string
+}
+
+func (d deleteOp) String() string {
+	return d.Key
 }
 
 type ObjectStorageController struct {
@@ -85,6 +106,17 @@ type ObjectStorageController struct {
 	initialized  bool
 	bucketClient bucketclientset.Interface
 	kubeClient   kubeclientset.Interface
+
+	locker     map[string]*sync.Mutex
+	lockerLock sync.Mutex
+}
+
+func NewDefaultObjectStorageController(identity string, leaderLockName string, threads int) (*ObjectStorageController, error) {
+	rateLimit := workqueue.NewMaxOfRateLimiter(
+		workqueue.NewItemExponentialFailureRateLimiter(100*time.Millisecond, 600*time.Second),
+		&workqueue.BucketRateLimiter{Limiter: rate.NewLimiter(rate.Limit(10), 100)},
+	)
+	return NewObjectStorageController(identity, leaderLockName, threads, rateLimit)
 }
 
 func NewObjectStorageController(identity string, leaderLockName string, threads int, limiter workqueue.RateLimiter) (*ObjectStorageController, error) {
@@ -211,23 +243,72 @@ func (c *ObjectStorageController) processNextItem(ctx context.Context) bool {
 		return false
 	}
 
-	// Tell the queue that we are done with processing this operation. This unblocks the key for other workers
-	// This allows safe parallel processing because two ops are never processed in parallel.
+	// With the lock below in place, we can safely tell the queue that we are done
+	// processing this item. The lock will ensure that multiple items of the same
+	// name and kind do not get processed simultaneously
 	defer c.queue.Done(op)
+
+	// Ensure that multiple operations on different versions of the same object
+	// do not happen in parallel
+	c.OpLock(op)
+	defer c.OpUnlock(op)
 
 	var err error
 	switch o := op.(type) {
 	case addOp:
-		err = o.AddFunc(ctx, o.Object)
+		add := *o.AddFunc
+		err = add(ctx, o.Object)
 	case updateOp:
-		err = o.UpdateFunc(ctx, o.OldObject, o.NewObject)
+		update := *o.UpdateFunc
+		err = update(ctx, o.OldObject, o.NewObject)
 	case deleteOp:
-		err = o.DeleteFunc(ctx, o.Object)
+		delete := *o.DeleteFunc
+		err = delete(ctx, o.Object)
+	default:
+		panic("unknown item in queue")
 	}
 
 	// Handle the error if something went wrong
 	c.handleErr(err, op)
 	return true
+}
+
+func (c *ObjectStorageController) OpLock(op interface{}) {
+	c.GetOpLock(op).Lock()
+}
+
+func (c *ObjectStorageController) OpUnlock(op interface{}) {
+	c.GetOpLock(op).Unlock()
+}
+
+func (c *ObjectStorageController) GetOpLock(op interface{}) *sync.Mutex {
+	var key string
+	var ext string
+
+	switch o := op.(type) {
+	case addOp:
+		key = o.Key
+		ext = fmt.Sprintf("%v", o.AddFunc)
+	case updateOp:
+		key = o.Key
+		ext = fmt.Sprintf("%v", o.UpdateFunc)
+	case deleteOp:
+		key = o.Key
+		ext = fmt.Sprintf("%v", o.DeleteFunc)
+	default:
+		panic("unknown item in queue")
+	}
+
+	lockKey := fmt.Sprintf("%s/%s", key, ext)
+	if c.locker == nil {
+		c.locker = map[string]*sync.Mutex{}
+	}
+	if _, ok := c.locker[lockKey]; !ok {
+		c.lockerLock.Lock()
+		c.locker[lockKey] = &sync.Mutex{}
+		c.lockerLock.Unlock()
+	}
+	return c.locker[lockKey]
 }
 
 // handleErr checks if an error happened and makes sure we will retry later.
@@ -256,7 +337,7 @@ func (c *ObjectStorageController) handleErr(err error, op interface{}) {
 	utilruntime.HandleError(err)
 	klog.Infof("Dropping op %+v out of the queue: %v", op, err)
 	*/
-	glog.Info("Error exceuting operation %+v: %+v", op, err)
+	glog.V(5).Infof("Error executing operation %+v: %+v", op, err)
 	c.queue.AddRateLimited(op)
 }
 
@@ -280,23 +361,41 @@ func (c *ObjectStorageController) runController(ctx context.Context) {
 					switch d.Type {
 					case cache.Sync, cache.Replaced, cache.Added, cache.Updated:
 						if old, exists, err := indexer.Get(d.Object); err == nil && exists {
+							key, err := cache.MetaNamespaceKeyFunc(d.Object)
+							if err != nil {
+								panic(err)
+							}
+
 							c.queue.Add(updateOp{
 								OldObject:  old,
 								NewObject:  d.Object,
-								UpdateFunc: update,
+								UpdateFunc: &update,
+								Key:        key,
 							})
 							return indexer.Update(d.Object)
 						} else {
+							key, err := cache.MetaNamespaceKeyFunc(d.Object)
+							if err != nil {
+								panic(err)
+							}
+
 							c.queue.Add(addOp{
 								Object:  d.Object,
-								AddFunc: add,
+								AddFunc: &add,
+								Key:     key,
 							})
 							return indexer.Add(d.Object)
 						}
 					case cache.Deleted:
+						key, err := cache.DeletionHandlingMetaNamespaceKeyFunc(d.Object)
+						if err != nil {
+							panic(err)
+						}
+
 						c.queue.Add(deleteOp{
 							Object:     d.Object,
-							DeleteFunc: delete,
+							DeleteFunc: &delete,
+							Key:        key,
 						})
 						return indexer.Delete(d.Object)
 					}

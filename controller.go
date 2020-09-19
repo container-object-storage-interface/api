@@ -1,22 +1,22 @@
 package main
 
 import (
+	"context"
+	"errors"
+	"flag"
 	"fmt"
 	"log"
 	"os"
-	"flag"
-	"context"
 	"os/signal"
 	"syscall"
-	
+
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
-	
+
 	"github.com/container-object-storage-interface/api/apis/objectstorage.k8s.io/v1alpha1"
 	bucketclientset "github.com/container-object-storage-interface/api/clientset"
 	bucketcontroller "github.com/container-object-storage-interface/api/controller"
 	kubeclientset "k8s.io/client-go/kubernetes"
-	"k8s.io/client-go/util/workqueue"
 
 	"github.com/golang/glog"
 )
@@ -82,7 +82,7 @@ func main() {
 }
 
 type bucketListener struct {
-	kubeClient kubeclientset.Interface
+	kubeClient   kubeclientset.Interface
 	bucketClient bucketclientset.Interface
 }
 
@@ -108,8 +108,10 @@ func (b *bucketListener) Delete(ctx context.Context, obj *v1alpha1.Bucket) error
 }
 
 type bucketAccessListener struct {
-	kubeClient kubeclientset.Interface
+	kubeClient   kubeclientset.Interface
 	bucketClient bucketclientset.Interface
+
+	count int
 }
 
 func (b *bucketAccessListener) InitializeKubeClient(k kubeclientset.Interface) {
@@ -121,6 +123,10 @@ func (b *bucketAccessListener) InitializeBucketClient(bc bucketclientset.Interfa
 }
 
 func (b *bucketAccessListener) Add(ctx context.Context, obj *v1alpha1.BucketAccess) error {
+	b.count += 1
+	if b.count < 5 {
+		return errors.New("failing")
+	}
 	glog.V(1).Infof("add called for bucketAccess %s", obj.Name)
 	return nil
 }
@@ -134,7 +140,7 @@ func (b *bucketAccessListener) Delete(ctx context.Context, obj *v1alpha1.BucketA
 }
 
 func run(args []string) error {
-	ctrl, err := bucketcontroller.NewObjectStorageController("sample-controller", "leader-lock", 5, workqueue.DefaultControllerRateLimiter())
+	ctrl, err := bucketcontroller.NewDefaultObjectStorageController("sample-controller", "leader-lock", 40)
 	if err != nil {
 		glog.Error(err)
 		return err
