@@ -16,6 +16,7 @@ import (
 	bucketclientset "github.com/container-object-storage-interface/api/clientset"
 	bucketcontroller "github.com/container-object-storage-interface/api/controller"
 	kubeclientset "k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/util/workqueue"
 
 	"github.com/golang/glog"
 )
@@ -133,7 +134,7 @@ func (b *bucketAccessListener) Delete(ctx context.Context, obj *v1alpha1.BucketA
 }
 
 func run(args []string) error {
-	ctrl, err := bucketcontroller.New("sample-controller", "leader-lock")
+	ctrl, err := bucketcontroller.NewObjectStorageController("sample-controller", "leader-lock", 5, workqueue.DefaultControllerRateLimiter())
 	if err != nil {
 		glog.Error(err)
 		return err

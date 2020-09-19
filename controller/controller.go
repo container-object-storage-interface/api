@@ -14,9 +14,11 @@ import (
 	bucketclientset "github.com/container-object-storage-interface/api/clientset"
 
 	// k8s api
-	"k8s.io/api/core/v1"
+	v1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/fields"
 	"k8s.io/apimachinery/pkg/runtime"
+	utilruntime "k8s.io/apimachinery/pkg/util/runtime"
+	"k8s.io/apimachinery/pkg/util/wait"
 
 	// k8s client
 	kubeclientset "k8s.io/client-go/kubernetes"
@@ -28,6 +30,7 @@ import (
 	"k8s.io/client-go/tools/leaderelection"
 	"k8s.io/client-go/tools/leaderelection/resourcelock"
 	"k8s.io/client-go/tools/record"
+	"k8s.io/client-go/util/workqueue"
 
 	// logging
 	"github.com/golang/glog"
@@ -36,13 +39,35 @@ import (
 	"github.com/spf13/viper"
 )
 
-type Controller struct {
+type addFunc func(ctx context.Context, obj interface{}) error
+type updateFunc func(ctx context.Context, old, new interface{}) error
+type deleteFunc func(ctx context.Context, obj interface{}) error
+
+type addOp struct {
+	Object  interface{}
+	AddFunc addFunc
+}
+
+type updateOp struct {
+	OldObject  interface{}
+	NewObject  interface{}
+	UpdateFunc updateFunc
+}
+
+type deleteOp struct {
+	Object     interface{}
+	DeleteFunc deleteFunc
+}
+
+type ObjectStorageController struct {
 	LeaseDuration time.Duration
 	RenewDeadline time.Duration
 	RetryPeriod   time.Duration
 
 	// Controller
 	ResyncPeriod time.Duration
+	queue        workqueue.RateLimitingInterface
+	threadiness  int
 
 	// Listeners
 	BucketListener              BucketListener
@@ -62,7 +87,7 @@ type Controller struct {
 	kubeClient   kubeclientset.Interface
 }
 
-func New(identity string, leaderLockName string) (*Controller, error) {
+func NewObjectStorageController(identity string, leaderLockName string, threads int, limiter workqueue.RateLimiter) (*ObjectStorageController, error) {
 	cfg, err := func() (*rest.Config, error) {
 		kubeConfig := viper.GetString("kube-config")
 
@@ -92,12 +117,14 @@ func New(identity string, leaderLockName string) (*Controller, error) {
 		}
 	}
 
-	return &Controller{
+	return &ObjectStorageController{
 		identity:     id,
 		kubeClient:   kubeClient,
 		bucketClient: bucketClient,
 		initialized:  false,
 		leaderLock:   leaderLockName,
+		queue:        workqueue.NewRateLimitingQueue(limiter),
+		threadiness:  threads,
 
 		ResyncPeriod:  30 * time.Second,
 		LeaseDuration: 15 * time.Second,
@@ -107,7 +134,7 @@ func New(identity string, leaderLockName string) (*Controller, error) {
 }
 
 // Run - runs the controller. Note that ctx must be cancellable i.e. ctx.Done() should not return nil
-func (c *Controller) Run(ctx context.Context) error {
+func (c *ObjectStorageController) Run(ctx context.Context) error {
 	if !c.initialized {
 		fmt.Errorf("Uninitialized controller. Atleast 1 listener should be added")
 	}
@@ -172,11 +199,68 @@ func (c *Controller) Run(ctx context.Context) error {
 	return nil // should never reach here
 }
 
-func (c *Controller) runController(ctx context.Context) {
-	type addFunc func(ctx context.Context, obj interface{}) error
-	type updateFunc func(ctx context.Context, old, new interface{}) error
-	type deleteFunc func(ctx context.Context, obj interface{}) error
+func (c *ObjectStorageController) runWorker(ctx context.Context) {
+	for c.processNextItem(ctx) {
+	}
+}
 
+func (c *ObjectStorageController) processNextItem(ctx context.Context) bool {
+	// Wait until there is a new item in the working queue
+	op, quit := c.queue.Get()
+	if quit {
+		return false
+	}
+
+	// Tell the queue that we are done with processing this operation. This unblocks the key for other workers
+	// This allows safe parallel processing because two ops are never processed in parallel.
+	defer c.queue.Done(op)
+
+	var err error
+	switch o := op.(type) {
+	case addOp:
+		err = o.AddFunc(ctx, o.Object)
+	case updateOp:
+		err = o.UpdateFunc(ctx, o.OldObject, o.NewObject)
+	case deleteOp:
+		err = o.DeleteFunc(ctx, o.Object)
+	}
+
+	// Handle the error if something went wrong
+	c.handleErr(err, op)
+	return true
+}
+
+// handleErr checks if an error happened and makes sure we will retry later.
+func (c *ObjectStorageController) handleErr(err error, op interface{}) {
+	if err == nil {
+		// Forget about the #AddRateLimited history of the op on every successful synchronization.
+		// This ensures that future processing of updates for this op is not delayed because of
+		// an outdated error history.
+		c.queue.Forget(op)
+		return
+	}
+
+	/* TODO: Determine if there is a maxium number of retries or time allowed before giving up
+	// This controller retries 5 times if something goes wrong. After that, it stops trying.
+	if c.queue.NumRequeues(op) < 5 {
+		klog.Infof("Error syncing op %v: %v", key, err)
+
+		// Re-enqueue the key rate limited. Based on the rate limiter on the
+		// queue and the re-enqueue history, the op will be processed later again.
+		c.queue.AddRateLimited(op)
+		return
+	}
+
+	c.queue.Forget(key)
+	// Report to an external entity that, even after several retries, we could not successfully process this op
+	utilruntime.HandleError(err)
+	klog.Infof("Dropping op %+v out of the queue: %v", op, err)
+	*/
+	glog.Info("Error exceuting operation %+v: %+v", op, err)
+	c.queue.AddRateLimited(op)
+}
+
+func (c *ObjectStorageController) runController(ctx context.Context) {
 	controllerFor := func(name string, objType runtime.Object, add addFunc, update updateFunc, delete deleteFunc) {
 		indexer := cache.NewIndexer(cache.MetaNamespaceKeyFunc, cache.Indexers{})
 		resyncPeriod := c.ResyncPeriod
@@ -196,20 +280,24 @@ func (c *Controller) runController(ctx context.Context) {
 					switch d.Type {
 					case cache.Sync, cache.Replaced, cache.Added, cache.Updated:
 						if old, exists, err := indexer.Get(d.Object); err == nil && exists {
-							if err := update(ctx, old, d.Object); err != nil {
-								return err
-							}
+							c.queue.Add(updateOp{
+								OldObject:  old,
+								NewObject:  d.Object,
+								UpdateFunc: update,
+							})
 							return indexer.Update(d.Object)
 						} else {
-							if err := add(ctx, d.Object); err != nil {
-								return err
-							}
+							c.queue.Add(addOp{
+								Object:  d.Object,
+								AddFunc: add,
+							})
 							return indexer.Add(d.Object)
 						}
 					case cache.Deleted:
-						if err := delete(ctx, d.Object); err != nil {
-							return err
-						}
+						c.queue.Add(deleteOp{
+							Object:     d.Object,
+							DeleteFunc: delete,
+						})
 						return indexer.Delete(d.Object)
 					}
 				}
@@ -217,7 +305,24 @@ func (c *Controller) runController(ctx context.Context) {
 			},
 		}
 		ctrlr := cache.New(cfg)
-		ctrlr.Run(ctx.Done())
+
+		defer utilruntime.HandleCrash()
+		defer c.queue.ShutDown()
+
+		glog.V(3).Infof("Starting %s controller", name)
+		go ctrlr.Run(ctx.Done())
+
+		if !cache.WaitForCacheSync(ctx.Done(), ctrlr.HasSynced) {
+			utilruntime.HandleError(fmt.Errorf("Timed out waiting for caches to sync"))
+			return
+		}
+
+		for i := 0; i < c.threadiness; i++ {
+			go wait.UntilWithContext(ctx, c.runWorker, time.Second)
+		}
+
+		<-ctx.Done()
+		glog.V(3).Infof("Stopping %s controller", name)
 	}
 
 	if c.BucketListener != nil {
