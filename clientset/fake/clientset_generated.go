@@ -20,8 +20,8 @@ package fake
 
 import (
 	clientset "github.com/container-object-storage-interface/api/clientset"
-	objectstoragev1alpha1 "github.com/container-object-storage-interface/api/clientset/typed/objectstorage.k8s.io/v1alpha1"
-	fakeobjectstoragev1alpha1 "github.com/container-object-storage-interface/api/clientset/typed/objectstorage.k8s.io/v1alpha1/fake"
+	objectstoragev1alpha1 "github.com/container-object-storage-interface/api/clientset/typed/storage.k8s.io/v1alpha1"
+	fakeobjectstoragev1alpha1 "github.com/container-object-storage-interface/api/clientset/typed/storage.k8s.io/v1alpha1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
