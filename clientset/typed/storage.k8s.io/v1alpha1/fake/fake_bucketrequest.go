@@ -32,13 +32,13 @@ import (
 
 // FakeBucketRequests implements BucketRequestInterface
 type FakeBucketRequests struct {
-	Fake *FakeObjectstorageV1alpha1
+	Fake *FakeStorageV1alpha1
 	ns   string
 }
 
-var bucketrequestsResource = schema.GroupVersionResource{Group: "objectstorage.k8s.io", Version: "v1alpha1", Resource: "bucketrequests"}
+var bucketrequestsResource = schema.GroupVersionResource{Group: "storage.k8s.io", Version: "v1alpha1", Resource: "bucketrequests"}
 
-var bucketrequestsKind = schema.GroupVersionKind{Group: "objectstorage.k8s.io", Version: "v1alpha1", Kind: "BucketRequest"}
+var bucketrequestsKind = schema.GroupVersionKind{Group: "storage.k8s.io", Version: "v1alpha1", Kind: "BucketRequest"}
 
 // Get takes name of the bucketRequest, and returns the corresponding bucketRequest object, and an error if there is any.
 func (c *FakeBucketRequests) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.BucketRequest, err error) {

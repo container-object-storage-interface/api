@@ -55,7 +55,7 @@ type bucketAccessClasses struct {
 }
 
 // newBucketAccessClasses returns a BucketAccessClasses
-func newBucketAccessClasses(c *ObjectstorageV1alpha1Client) *bucketAccessClasses {
+func newBucketAccessClasses(c *StorageV1alpha1Client) *bucketAccessClasses {
 	return &bucketAccessClasses{
 		client: c.RESTClient(),
 	}

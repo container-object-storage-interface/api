@@ -12,7 +12,7 @@ import (
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 	
-	"github.com/container-object-storage-interface/api/apis/objectstorage.k8s.io/v1alpha1"
+	"github.com/container-object-storage-interface/api/apis/storage.k8s.io/v1alpha1"
 	bucketclientset "github.com/container-object-storage-interface/api/clientset"
 	bucketcontroller "github.com/container-object-storage-interface/api/controller"
 	kubeclientset "k8s.io/client-go/kubernetes"
