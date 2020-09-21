@@ -32,12 +32,12 @@ import (
 
 // FakeBucketClasses implements BucketClassInterface
 type FakeBucketClasses struct {
-	Fake *FakeObjectstorageV1alpha1
+	Fake *FakeStorageV1alpha1
 }
 
-var bucketclassesResource = schema.GroupVersionResource{Group: "objectstorage.k8s.io", Version: "v1alpha1", Resource: "bucketclasses"}
+var bucketclassesResource = schema.GroupVersionResource{Group: "storage.k8s.io", Version: "v1alpha1", Resource: "bucketclasses"}
 
-var bucketclassesKind = schema.GroupVersionKind{Group: "objectstorage.k8s.io", Version: "v1alpha1", Kind: "BucketClass"}
+var bucketclassesKind = schema.GroupVersionKind{Group: "storage.k8s.io", Version: "v1alpha1", Kind: "BucketClass"}
 
 // Get takes name of the bucketClass, and returns the corresponding bucketClass object, and an error if there is any.
 func (c *FakeBucketClasses) Get(ctx context.Context, name string, options v1.GetOptions) (result *v1alpha1.BucketClass, err error) {

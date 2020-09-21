@@ -6,15 +6,15 @@ metadata:
   annotations:
     controller-gen.kubebuilder.io/version: (devel)
   creationTimestamp: null
-  name: bucketaccessclasses.objectstorage.k8s.io
+  name: bucketrequests.storage.k8s.io
 spec:
-  group: objectstorage.k8s.io
+  group: storage.k8s.io
   names:
-    kind: BucketAccessClass
-    listKind: BucketAccessClassList
-    plural: bucketaccessclasses
-    singular: bucketaccessclass
-  scope: Cluster
+    kind: BucketRequest
+    listKind: BucketRequestList
+    plural: bucketrequests
+    singular: bucketrequest
+  scope: Namespaced
   versions:
   - name: v1alpha1
     schema:
@@ -32,17 +32,31 @@ spec:
             type: string
           metadata:
             type: object
-          parameters:
-            additionalProperties:
-              type: string
+          spec:
+            properties:
+              bucketClassName:
+                type: string
+              bucketInstanceName:
+                type: string
+              bucketPrefix:
+                type: string
+              protocol:
+                type: string
+            required:
+            - protocol
             type: object
-          policyActions:
-            type: string
-          provisioner:
-            type: string
+          status:
+            properties:
+              bucketAvailable:
+                type: boolean
+              message:
+                type: string
+            type: object
         type: object
     served: true
     storage: true
+    subresources:
+      status: {}
 status:
   acceptedNames:
     kind: ""

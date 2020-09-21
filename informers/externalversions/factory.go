@@ -172,9 +172,9 @@ type SharedInformerFactory interface {
 	ForResource(resource schema.GroupVersionResource) (GenericInformer, error)
 	WaitForCacheSync(stopCh <-chan struct{}) map[reflect.Type]bool
 
-	Objectstorage() storagek8sio.Interface
+	Storage() storagek8sio.Interface
 }
 
-func (f *sharedInformerFactory) Objectstorage() storagek8sio.Interface {
+func (f *sharedInformerFactory) Storage() storagek8sio.Interface {
 	return storagek8sio.New(f, f.namespace, f.tweakListOptions)
 }

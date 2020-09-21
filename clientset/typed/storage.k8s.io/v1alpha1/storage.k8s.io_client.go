@@ -24,7 +24,7 @@ import (
 	rest "k8s.io/client-go/rest"
 )
 
-type ObjectstorageV1alpha1Interface interface {
+type StorageV1alpha1Interface interface {
 	RESTClient() rest.Interface
 	BucketsGetter
 	BucketAccessesGetter
@@ -34,37 +34,37 @@ type ObjectstorageV1alpha1Interface interface {
 	BucketRequestsGetter
 }
 
-// ObjectstorageV1alpha1Client is used to interact with features provided by the objectstorage.k8s.io group.
-type ObjectstorageV1alpha1Client struct {
+// StorageV1alpha1Client is used to interact with features provided by the storage.k8s.io group.
+type StorageV1alpha1Client struct {
 	restClient rest.Interface
 }
 
-func (c *ObjectstorageV1alpha1Client) Buckets() BucketInterface {
+func (c *StorageV1alpha1Client) Buckets() BucketInterface {
 	return newBuckets(c)
 }
 
-func (c *ObjectstorageV1alpha1Client) BucketAccesses() BucketAccessInterface {
+func (c *StorageV1alpha1Client) BucketAccesses() BucketAccessInterface {
 	return newBucketAccesses(c)
 }
 
-func (c *ObjectstorageV1alpha1Client) BucketAccessClasses() BucketAccessClassInterface {
+func (c *StorageV1alpha1Client) BucketAccessClasses() BucketAccessClassInterface {
 	return newBucketAccessClasses(c)
 }
 
-func (c *ObjectstorageV1alpha1Client) BucketAccessRequests(namespace string) BucketAccessRequestInterface {
+func (c *StorageV1alpha1Client) BucketAccessRequests(namespace string) BucketAccessRequestInterface {
 	return newBucketAccessRequests(c, namespace)
 }
 
-func (c *ObjectstorageV1alpha1Client) BucketClasses() BucketClassInterface {
+func (c *StorageV1alpha1Client) BucketClasses() BucketClassInterface {
 	return newBucketClasses(c)
 }
 
-func (c *ObjectstorageV1alpha1Client) BucketRequests(namespace string) BucketRequestInterface {
+func (c *StorageV1alpha1Client) BucketRequests(namespace string) BucketRequestInterface {
 	return newBucketRequests(c, namespace)
 }
 
-// NewForConfig creates a new ObjectstorageV1alpha1Client for the given config.
-func NewForConfig(c *rest.Config) (*ObjectstorageV1alpha1Client, error) {
+// NewForConfig creates a new StorageV1alpha1Client for the given config.
+func NewForConfig(c *rest.Config) (*StorageV1alpha1Client, error) {
 	config := *c
 	if err := setConfigDefaults(&config); err != nil {
 		return nil, err
@@ -73,12 +73,12 @@ func NewForConfig(c *rest.Config) (*ObjectstorageV1alpha1Client, error) {
 	if err != nil {
 		return nil, err
 	}
-	return &ObjectstorageV1alpha1Client{client}, nil
+	return &StorageV1alpha1Client{client}, nil
 }
 
-// NewForConfigOrDie creates a new ObjectstorageV1alpha1Client for the given config and
+// NewForConfigOrDie creates a new StorageV1alpha1Client for the given config and
 // panics if there is an error in the config.
-func NewForConfigOrDie(c *rest.Config) *ObjectstorageV1alpha1Client {
+func NewForConfigOrDie(c *rest.Config) *StorageV1alpha1Client {
 	client, err := NewForConfig(c)
 	if err != nil {
 		panic(err)
@@ -86,9 +86,9 @@ func NewForConfigOrDie(c *rest.Config) *ObjectstorageV1alpha1Client {
 	return client
 }
 
-// New creates a new ObjectstorageV1alpha1Client for the given RESTClient.
-func New(c rest.Interface) *ObjectstorageV1alpha1Client {
-	return &ObjectstorageV1alpha1Client{c}
+// New creates a new StorageV1alpha1Client for the given RESTClient.
+func New(c rest.Interface) *StorageV1alpha1Client {
+	return &StorageV1alpha1Client{c}
 }
 
 func setConfigDefaults(config *rest.Config) error {
@@ -106,7 +106,7 @@ func setConfigDefaults(config *rest.Config) error {
 
 // RESTClient returns a RESTClient that is used to communicate
 // with API server by this client implementation.
-func (c *ObjectstorageV1alpha1Client) RESTClient() rest.Interface {
+func (c *StorageV1alpha1Client) RESTClient() rest.Interface {
 	if c == nil {
 		return nil
 	}

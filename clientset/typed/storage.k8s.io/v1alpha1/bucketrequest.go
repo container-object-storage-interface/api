@@ -57,7 +57,7 @@ type bucketRequests struct {
 }
 
 // newBucketRequests returns a BucketRequests
-func newBucketRequests(c *ObjectstorageV1alpha1Client, namespace string) *bucketRequests {
+func newBucketRequests(c *StorageV1alpha1Client, namespace string) *bucketRequests {
 	return &bucketRequests{
 		client: c.RESTClient(),
 		ns:     namespace,

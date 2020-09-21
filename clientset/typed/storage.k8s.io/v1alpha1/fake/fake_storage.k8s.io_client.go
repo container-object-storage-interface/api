@@ -24,37 +24,37 @@ import (
 	testing "k8s.io/client-go/testing"
 )
 
-type FakeObjectstorageV1alpha1 struct {
+type FakeStorageV1alpha1 struct {
 	*testing.Fake
 }
 
-func (c *FakeObjectstorageV1alpha1) Buckets() v1alpha1.BucketInterface {
+func (c *FakeStorageV1alpha1) Buckets() v1alpha1.BucketInterface {
 	return &FakeBuckets{c}
 }
 
-func (c *FakeObjectstorageV1alpha1) BucketAccesses() v1alpha1.BucketAccessInterface {
+func (c *FakeStorageV1alpha1) BucketAccesses() v1alpha1.BucketAccessInterface {
 	return &FakeBucketAccesses{c}
 }
 
-func (c *FakeObjectstorageV1alpha1) BucketAccessClasses() v1alpha1.BucketAccessClassInterface {
+func (c *FakeStorageV1alpha1) BucketAccessClasses() v1alpha1.BucketAccessClassInterface {
 	return &FakeBucketAccessClasses{c}
 }
 
-func (c *FakeObjectstorageV1alpha1) BucketAccessRequests(namespace string) v1alpha1.BucketAccessRequestInterface {
+func (c *FakeStorageV1alpha1) BucketAccessRequests(namespace string) v1alpha1.BucketAccessRequestInterface {
 	return &FakeBucketAccessRequests{c, namespace}
 }
 
-func (c *FakeObjectstorageV1alpha1) BucketClasses() v1alpha1.BucketClassInterface {
+func (c *FakeStorageV1alpha1) BucketClasses() v1alpha1.BucketClassInterface {
 	return &FakeBucketClasses{c}
 }
 
-func (c *FakeObjectstorageV1alpha1) BucketRequests(namespace string) v1alpha1.BucketRequestInterface {
+func (c *FakeStorageV1alpha1) BucketRequests(namespace string) v1alpha1.BucketRequestInterface {
 	return &FakeBucketRequests{c, namespace}
 }
 
 // RESTClient returns a RESTClient that is used to communicate
 // with API server by this client implementation.
-func (c *FakeObjectstorageV1alpha1) RESTClient() rest.Interface {
+func (c *FakeStorageV1alpha1) RESTClient() rest.Interface {
 	var ret *rest.RESTClient
 	return ret
 }

@@ -61,13 +61,13 @@ func NewFilteredBucketInformer(client clientset.Interface, resyncPeriod time.Dur
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ObjectstorageV1alpha1().Buckets().List(context.TODO(), options)
+				return client.StorageV1alpha1().Buckets().List(context.TODO(), options)
 			},
 			WatchFunc: func(options v1.ListOptions) (watch.Interface, error) {
 				if tweakListOptions != nil {
 					tweakListOptions(&options)
 				}
-				return client.ObjectstorageV1alpha1().Buckets().Watch(context.TODO(), options)
+				return client.StorageV1alpha1().Buckets().Watch(context.TODO(), options)
 			},
 		},
 		&storagek8siov1alpha1.Bucket{},

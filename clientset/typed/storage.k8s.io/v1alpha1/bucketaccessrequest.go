@@ -57,7 +57,7 @@ type bucketAccessRequests struct {
 }
 
 // newBucketAccessRequests returns a BucketAccessRequests
-func newBucketAccessRequests(c *ObjectstorageV1alpha1Client, namespace string) *bucketAccessRequests {
+func newBucketAccessRequests(c *StorageV1alpha1Client, namespace string) *bucketAccessRequests {
 	return &bucketAccessRequests{
 		client: c.RESTClient(),
 		ns:     namespace,
