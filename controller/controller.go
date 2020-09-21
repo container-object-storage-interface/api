@@ -10,7 +10,7 @@ import (
 	"time"
 
 	// storage
-	v1alpha1 "github.com/container-object-storage-interface/api/apis/storage.k8s.io/v1alpha1"
+	v1alpha1 "github.com/container-object-storage-interface/api/apis/objectstorage.k8s.io/v1alpha1"
 	bucketclientset "github.com/container-object-storage-interface/api/clientset"
 
 	// k8s api

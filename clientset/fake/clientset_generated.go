@@ -20,8 +20,8 @@ package fake
 
 import (
 	clientset "github.com/container-object-storage-interface/api/clientset"
-	storagev1alpha1 "github.com/container-object-storage-interface/api/clientset/typed/storage.k8s.io/v1alpha1"
-	fakestoragev1alpha1 "github.com/container-object-storage-interface/api/clientset/typed/storage.k8s.io/v1alpha1/fake"
+	objectstoragev1alpha1 "github.com/container-object-storage-interface/api/clientset/typed/objectstorage.k8s.io/v1alpha1"
+	fakeobjectstoragev1alpha1 "github.com/container-object-storage-interface/api/clientset/typed/objectstorage.k8s.io/v1alpha1/fake"
 	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/discovery"
@@ -76,7 +76,7 @@ func (c *Clientset) Tracker() testing.ObjectTracker {
 
 var _ clientset.Interface = &Clientset{}
 
-// StorageV1alpha1 retrieves the StorageV1alpha1Client
-func (c *Clientset) StorageV1alpha1() storagev1alpha1.StorageV1alpha1Interface {
-	return &fakestoragev1alpha1.FakeStorageV1alpha1{Fake: &c.Fake}
+// ObjectstorageV1alpha1 retrieves the ObjectstorageV1alpha1Client
+func (c *Clientset) ObjectstorageV1alpha1() objectstoragev1alpha1.ObjectstorageV1alpha1Interface {
+	return &fakeobjectstoragev1alpha1.FakeObjectstorageV1alpha1{Fake: &c.Fake}
 }
