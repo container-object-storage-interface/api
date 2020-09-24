@@ -184,22 +184,28 @@ func (c *ObjectStorageController) Run(ctx context.Context) error {
 		return "default"
 	}()
 
-	leader := func() string {
+	sanitize := func(n string) string {
 		re := regexp.MustCompile("[^a-zA-Z0-9-]")
-		name := strings.ToLower(re.ReplaceAllString(fmt.Sprintf("%s/%s", c.leaderLock, c.identity), "-"))
+		name := strings.ToLower(re.ReplaceAllString(n, "-"))
 		if name[len(name)-1] == '-' {
 			// name must not end with '-'
 			name = name + "X"
 		}
 		return name
-	}()
+	}
+
+	leader := sanitize(fmt.Sprintf("%s/%s", c.leaderLock, c.identity))
+	id, err := os.Hostname()
+	if err != nil {
+		return fmt.Errorf("error getting the default leader identity: %v", err)
+	}
 
 	recorder := record.NewBroadcaster()
 	recorder.StartRecordingToSink(&corev1.EventSinkImpl{Interface: c.kubeClient.CoreV1().Events(ns)})
 	eRecorder := recorder.NewRecorder(scheme.Scheme, v1.EventSource{Component: leader})
 
 	rlConfig := resourcelock.ResourceLockConfig{
-		Identity:      c.identity,
+		Identity:      sanitize(id),
 		EventRecorder: eRecorder,
 	}
 
