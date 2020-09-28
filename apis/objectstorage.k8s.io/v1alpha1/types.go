@@ -58,7 +58,7 @@ type BucketStatus struct {
 	// +optional
 	Message string `json:"message,omitempty"`
 	// +optional
-	BucketAvailable string `json:"bucketAvailable,omitempty"`
+	BucketAvailable bool `json:"bucketAvailable,omitempty"`
 }
 
 type ReleasePolicy string

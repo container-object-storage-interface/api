@@ -117,7 +117,7 @@ spec:
           status:
             properties:
               bucketAvailable:
-                type: string
+                type: boolean
               message:
                 type: string
             type: object
@@ -130,5 +130,5 @@ status:
   acceptedNames:
     kind: ""
     plural: ""
-  conditions: null
-  storedVersions: null
+  conditions: []
+  storedVersions: []
