@@ -1,20 +1,20 @@
 package v1alpha1
 
-type ProtocolSignature string
+type ProtocolName string
 
 const (
-	ProtocolSignatureS3    ProtocolSignature = "s3"
-	ProtocolSignatureAzure ProtocolSignature = "azure"
-	ProtocolSignatureGCS   ProtocolSignature = "gcs"
+	ProtocolNameS3    ProtocolName = "s3"
+	ProtocolNameAzure ProtocolName = "azure"
+	ProtocolNameGCS   ProtocolName = "gcs"
 )
 
 type Protocol struct {
 	// +kubebuilder:validation:Enum:={s3,azure,gcs}
-	ProtocolSignature ProtocolSignature `json:"protocolSignature"`
+	ProtocolName ProtocolName `json:"protocolName"`
 	// +optional
 	S3 *S3Protocol `json:"s3,omitempty"`
 	// +optional
-	Azure *AzureProtocol `json:"azure,omitempty"`
+	AzureBlob *AzureProtocol `json:"azureBlob,omitempty"`
 	// +optional
 	GCS *GCSProtocol `json:"gcs,omitempty"`
 }
