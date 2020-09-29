@@ -431,6 +431,8 @@ func (c *ObjectStorageController) runController(ctx context.Context) {
 	}
 
 	if c.BucketListener != nil {
+		c.BucketListener.InitializeKubeClient(c.kubeClient)
+		c.BucketListener.InitializeBucketClient(c.bucketClient)
 		addFunc := func(ctx context.Context, obj interface{}) error {
 			return c.BucketListener.Add(ctx, obj.(*v1alpha1.Bucket))
 		}
@@ -443,6 +445,8 @@ func (c *ObjectStorageController) runController(ctx context.Context) {
 		go controllerFor("Buckets", &v1alpha1.Bucket{}, addFunc, updateFunc, deleteFunc)
 	}
 	if c.BucketRequestListener != nil {
+		c.BucketRequestListener.InitializeKubeClient(c.kubeClient)
+		c.BucketRequestListener.InitializeBucketClient(c.bucketClient)
 		addFunc := func(ctx context.Context, obj interface{}) error {
 			return c.BucketRequestListener.Add(ctx, obj.(*v1alpha1.BucketRequest))
 		}
@@ -455,6 +459,8 @@ func (c *ObjectStorageController) runController(ctx context.Context) {
 		go controllerFor("BucketRequests", &v1alpha1.BucketRequest{}, addFunc, updateFunc, deleteFunc)
 	}
 	if c.BucketClassListener != nil {
+		c.BucketClassListener.InitializeKubeClient(c.kubeClient)
+		c.BucketClassListener.InitializeBucketClient(c.bucketClient)
 		addFunc := func(ctx context.Context, obj interface{}) error {
 			return c.BucketClassListener.Add(ctx, obj.(*v1alpha1.BucketClass))
 		}
@@ -468,6 +474,8 @@ func (c *ObjectStorageController) runController(ctx context.Context) {
 	}
 
 	if c.BucketAccessListener != nil {
+		c.BucketAccessListener.InitializeKubeClient(c.kubeClient)
+		c.BucketAccessListener.InitializeBucketClient(c.bucketClient)
 		addFunc := func(ctx context.Context, obj interface{}) error {
 			return c.BucketAccessListener.Add(ctx, obj.(*v1alpha1.BucketAccess))
 		}
@@ -480,6 +488,8 @@ func (c *ObjectStorageController) runController(ctx context.Context) {
 		go controllerFor("BucketAccesses", &v1alpha1.BucketAccess{}, addFunc, updateFunc, deleteFunc)
 	}
 	if c.BucketAccessRequestListener != nil {
+		c.BucketAccessRequestListener.InitializeKubeClient(c.kubeClient)
+		c.BucketAccessRequestListener.InitializeBucketClient(c.bucketClient)
 		addFunc := func(ctx context.Context, obj interface{}) error {
 			return c.BucketAccessRequestListener.Add(ctx, obj.(*v1alpha1.BucketAccessRequest))
 		}
@@ -492,6 +502,8 @@ func (c *ObjectStorageController) runController(ctx context.Context) {
 		go controllerFor("BucketAccessRequests", &v1alpha1.BucketAccessRequest{}, addFunc, updateFunc, deleteFunc)
 	}
 	if c.BucketAccessClassListener != nil {
+		c.BucketAccessClassListener.InitializeKubeClient(c.kubeClient)
+		c.BucketAccessClassListener.InitializeBucketClient(c.bucketClient)
 		addFunc := func(ctx context.Context, obj interface{}) error {
 			return c.BucketAccessClassListener.Add(ctx, obj.(*v1alpha1.BucketAccessClass))
 		}
