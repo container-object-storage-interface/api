@@ -2,8 +2,6 @@
 
 package v1alpha1
 
-type S3Region string
-
 type S3SignatureVersion string
 
 const (
@@ -12,9 +10,10 @@ const (
 )
 
 type S3Protocol struct {
-	Endpoint         string             `json:"endpoint,omitempty"`
-	BucketName       string             `json:"bucketName,omitempty"`
-	Region           string             `json:"region,omitempty"`
+	Version    string `json:"version,omitempty"`
+	Endpoint   string `json:"endpoint,omitempty"`
+	BucketName string `json:"bucketName,omitempty"`
+	Region     string `json:"region,omitempty"`
 	// +kubebuilder:validation:Enum:={s3v2,s3v4}
 	SignatureVersion S3SignatureVersion `json:"signatureVersion,omitempty"`
 }

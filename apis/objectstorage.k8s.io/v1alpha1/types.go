@@ -2,6 +2,7 @@ package v1alpha1
 
 import (
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/types"
 )
 
 type BucketRequestBinding struct {
@@ -40,16 +41,15 @@ type AnonymousAccessMode struct {
 type BucketSpec struct {
 	Provisioner string `json:"provisioner"`
 	// +kubebuilder:default:=retain
-	ReleasePolicy ReleasePolicy `json:"releasePolicy"`
+	RetentionPolicy RetentionPolicy `json:"retentionPolicy"`
 
 	AnonymousAccessMode AnonymousAccessMode `json:"anonymousAccessMode,omitempty"`
 	BucketClassName     string              `json:"bucketClassName,omitempty"`
+	BucketRequest       *ObjectReference    `json:"bucketRequest,omitempty"`
 	// +listType=atomic
 	AllowedNamespaces []string `json:"allowedNamespaces,omitempty"`
-	
-	// +listType=set
-	BucketAccessBindings []string `json:"bucketAccessBindings,omitempty"`
-	Protocol             Protocol `json:"protocol"`
+
+	Protocol Protocol `json:"protocol"`
 	// +optional
 	Parameters map[string]string `json:"parameters,omitempty"`
 }
@@ -58,14 +58,14 @@ type BucketStatus struct {
 	// +optional
 	Message string `json:"message,omitempty"`
 	// +optional
-	BucketAvailable string `json:"bucketAvailable,omitempty"`
+	BucketAvailable bool `json:"bucketAvailable,omitempty"`
 }
 
-type ReleasePolicy string
+type RetentionPolicy string
 
 const (
-	ReleasePolicyRetain ReleasePolicy = "Retain"
-	ReleasePolicyDelete ReleasePolicy = "Delete"
+	RetentionPolicyRetain RetentionPolicy = "Retain"
+	RetentionPolicyDelete RetentionPolicy = "Delete"
 )
 
 // +genclient
@@ -183,18 +183,22 @@ type BucketAccessClassList struct {
 }
 
 type BucketAccessSpec struct {
+	Provisioner string `json:"provisioner,omitempty"`
+
 	// +optional
-	BucketAccessRequestName string `json:"bucketAccessRequestName,omitempty"`
+	BucketInstanceName string `json:"bucketInstanceName,omitempty"`
 	// +optional
-	BucketAccessRequestNamespace string `json:"bucketAccessRequestNamespace,omitempty"`
+	BucketAccessRequest string `json:"bucketAccessRequest,omitempty"`
 	// +optional
-	ServiceAccountName string `json:"serviceAccountName,omitempty"`
+	ServiceAccount string `json:"serviceAccount,omitempty"`
 	// +optional
 	AccessSecretName string `json:"accessSecretName,omitempty"`
-
-	PolicyActions string `json:"policyActions,omitempty"`
-	
-	Provisioner   string `json:"provisioner,omitempty"`
+	// +optional
+	MintedSecretName string `json:"mintedSecretName,omitempty"`
+	// +optional
+	PolicyActionsConfigMapData map[string]string `json:"policyActionsConfigMapData,omitempty"`
+	// +optional
+	Principal string `json:"principal,omitempty"`
 	// +optional
 	Parameters map[string]string `json:"parameters,omitempty"`
 }
@@ -272,6 +276,21 @@ type BucketAccessRequestList struct {
 	metav1.TypeMeta `json:",inline"`
 	metav1.ListMeta `json:"metadata,omitempty"`
 	Items           []BucketAccessRequest `json:"items"`
+}
+
+type ObjectReference struct {
+	// Namespace of the referent.
+	// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/
+	// +optional
+	Namespace string `json:"namespace,omitempty"`
+	// Name of the referent.
+	// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names
+	// +optional
+	Name string `json:"name,omitempty"`
+	// UID of the referent.
+	// More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids
+	// +optional
+	UID types.UID `json:"uid,omitempty"`
 }
 
 func init() {
