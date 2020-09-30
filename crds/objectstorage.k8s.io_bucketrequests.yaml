@@ -42,48 +42,16 @@ spec:
                 type: string
               protocol:
                 properties:
-                  azureBlob:
-                    properties:
-                      containerName:
-                        type: string
-                      storageAccount:
-                        type: string
-                    type: object
-                  gcs:
-                    properties:
-                      bucketName:
-                        type: string
-                      privateKeyName:
-                        type: string
-                      projectID:
-                        type: string
-                      serviceAccount:
-                        type: string
-                    type: object
-                  protocolName:
+                  name:
                     enum:
                     - s3
-                    - azure
+                    - azureBlob
                     - gcs
                     type: string
-                  s3:
-                    properties:
-                      bucketName:
-                        type: string
-                      endpoint:
-                        type: string
-                      region:
-                        type: string
-                      signatureVersion:
-                        enum:
-                        - s3v2
-                        - s3v4
-                        type: string
-                      version:
-                        type: string
-                    type: object
+                  version:
+                    type: string
                 required:
-                - protocolName
+                - name
                 type: object
             required:
             - protocol
@@ -104,5 +72,5 @@ status:
   acceptedNames:
     kind: ""
     plural: ""
-  conditions: []
-  storedVersions: []
+  conditions: null
+  storedVersions: null

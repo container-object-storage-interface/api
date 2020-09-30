@@ -17,7 +17,7 @@ type BucketRequestSpec struct {
 	BucketPrefix string `json:"bucketPrefix,omitempty"`
 	// +optional
 	BucketClassName string    `json:"bucketClassName,omitempty"`
-	Protocol        Protocol  `json:"protocol"`
+	Protocol        RequestedProtocol  `json:"protocol"`
 }
 
 type BucketRequestStatus struct {
@@ -168,7 +168,7 @@ type BucketAccessClass struct {
 
 	Provisioner string `json:"provisioner,omitempty"`
 
-	PolicyActions string `json:"policyActions,omitempty"`
+	PolicyActionsConfigMap *ObjectReference `json:"policyActionsConfigMap,omitempty"`
 
 	// +optional
 	Parameters map[string]string `json:"parameters,omitempty"`

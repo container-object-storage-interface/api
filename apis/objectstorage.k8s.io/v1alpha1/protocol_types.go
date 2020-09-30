@@ -4,13 +4,21 @@ type ProtocolName string
 
 const (
 	ProtocolNameS3    ProtocolName = "s3"
-	ProtocolNameAzure ProtocolName = "azure"
+	ProtocolNameAzure ProtocolName = "azureBlob"
 	ProtocolNameGCS   ProtocolName = "gcs"
 )
 
+
+type RequestedProtocol struct {
+	// +kubebuilder:validation:Enum:={s3,azureBlob,gcs}
+	Name ProtocolName `json:"name"`
+	// +optional
+	Version string    `json:"version"`
+}
+
 type Protocol struct {
-	// +kubebuilder:validation:Enum:={s3,azure,gcs}
-	ProtocolName ProtocolName `json:"protocolName"`
+        // +required
+	RequestedProtocol   `json:"requestedProtocol"`
 	// +optional
 	S3 *S3Protocol `json:"s3,omitempty"`
 	// +optional
