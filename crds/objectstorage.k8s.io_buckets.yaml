@@ -50,20 +50,27 @@ spec:
                   publicWriteOnly:
                     type: boolean
                 type: object
-              bucketAccessBindings:
-                items:
-                  type: string
-                type: array
-                x-kubernetes-list-type: set
               bucketClassName:
                 type: string
+              bucketRequest:
+                properties:
+                  name:
+                    description: 'Name of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#names'
+                    type: string
+                  namespace:
+                    description: 'Namespace of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/'
+                    type: string
+                  uid:
+                    description: 'UID of the referent. More info: https://kubernetes.io/docs/concepts/overview/working-with-objects/names/#uids'
+                    type: string
+                type: object
               parameters:
                 additionalProperties:
                   type: string
                 type: object
               protocol:
                 properties:
-                  azure:
+                  azureBlob:
                     properties:
                       containerName:
                         type: string
@@ -81,7 +88,7 @@ spec:
                       serviceAccount:
                         type: string
                     type: object
-                  protocolSignature:
+                  protocolName:
                     enum:
                     - s3
                     - azure
@@ -100,24 +107,26 @@ spec:
                         - s3v2
                         - s3v4
                         type: string
+                      version:
+                        type: string
                     type: object
                 required:
-                - protocolSignature
+                - protocolName
                 type: object
               provisioner:
                 type: string
-              releasePolicy:
+              retentionPolicy:
                 default: retain
                 type: string
             required:
             - protocol
             - provisioner
-            - releasePolicy
+            - retentionPolicy
             type: object
           status:
             properties:
               bucketAvailable:
-                type: string
+                type: boolean
               message:
                 type: string
             type: object

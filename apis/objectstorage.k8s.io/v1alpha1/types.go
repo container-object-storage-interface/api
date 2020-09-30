@@ -16,8 +16,8 @@ type BucketRequestSpec struct {
 	// +optional
 	BucketPrefix string `json:"bucketPrefix,omitempty"`
 	// +optional
-	BucketClassName string            `json:"bucketClassName,omitempty"`
-	Protocol        ProtocolSignature `json:"protocol"`
+	BucketClassName string    `json:"bucketClassName,omitempty"`
+	Protocol        Protocol  `json:"protocol"`
 }
 
 type BucketRequestStatus struct {
@@ -141,7 +141,7 @@ type BucketClass struct {
 	// +listType=atomic
 	AnonymousAccessModes []AnonymousAccessMode `json:"anonymousAccessModes,omitempty"`
 	// +kubebuilder:default:=retain
-	ReleasePolicy ReleasePolicy `json:"releasePolicy,omitempty"`
+	RetentionPolicy RetentionPolicy `json:"retentionPolicy,omitempty"`
 	// +optional
 	Parameters map[string]string `json:"parameters,omitempty"`
 }
