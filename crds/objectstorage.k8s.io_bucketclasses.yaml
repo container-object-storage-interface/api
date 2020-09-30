@@ -62,7 +62,7 @@ spec:
             type: string
           provisioner:
             type: string
-          releasePolicy:
+          retentionPolicy:
             default: retain
             type: string
         type: object

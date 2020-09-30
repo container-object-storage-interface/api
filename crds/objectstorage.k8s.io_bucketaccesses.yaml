@@ -36,19 +36,25 @@ spec:
             properties:
               accessSecretName:
                 type: string
-              bucketAccessRequestName:
+              bucketAccessRequest:
                 type: string
-              bucketAccessRequestNamespace:
+              bucketInstanceName:
+                type: string
+              mintedSecretName:
                 type: string
               parameters:
                 additionalProperties:
                   type: string
                 type: object
-              policyActions:
+              policyActionsConfigMapData:
+                additionalProperties:
+                  type: string
+                type: object
+              principal:
                 type: string
               provisioner:
                 type: string
-              serviceAccountName:
+              serviceAccount:
                 type: string
             type: object
           status:
