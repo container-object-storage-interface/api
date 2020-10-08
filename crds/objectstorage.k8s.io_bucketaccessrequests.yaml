@@ -34,8 +34,6 @@ spec:
             type: object
           spec:
             properties:
-              accessSecretName:
-                type: string
               bucketAccessClassName:
                 type: string
               bucketAccessName:
@@ -44,6 +42,9 @@ spec:
                 type: string
               serviceAccountName:
                 type: string
+            required:
+            - bucketAccessClassName
+            - bucketRequestName
             type: object
           status:
             properties:
@@ -61,5 +62,5 @@ status:
   acceptedNames:
     kind: ""
     plural: ""
-  conditions: null
-  storedVersions: null
+  conditions: []
+  storedVersions: []

@@ -16,15 +16,15 @@ type BucketRequestSpec struct {
 	// +optional
 	BucketPrefix string `json:"bucketPrefix,omitempty"`
 	// +optional
-	BucketClassName string    `json:"bucketClassName,omitempty"`
-	Protocol        RequestedProtocol  `json:"protocol"`
+	BucketClassName string            `json:"bucketClassName,omitempty"`
+	Protocol        RequestedProtocol `json:"protocol"`
 }
 
 type BucketRequestStatus struct {
 	// +optional
 	Message string `json:"message,omitempty"`
 	// +optional
-	BucketAvailable bool `json:"bucketAvailable,omitempty"`
+	BucketAvailable bool `json:"bucketAvailable"`
 }
 
 type AnonymousAccessMode struct {
@@ -39,17 +39,18 @@ type AnonymousAccessMode struct {
 }
 
 type BucketSpec struct {
-	Provisioner string `json:"provisioner"`
+	// +optional
+	Provisioner string `json:"provisioner,omitempty"`
 	// +kubebuilder:default:=retain
 	RetentionPolicy RetentionPolicy `json:"retentionPolicy"`
-
+	// +optional
 	AnonymousAccessMode AnonymousAccessMode `json:"anonymousAccessMode,omitempty"`
-	BucketClassName     string              `json:"bucketClassName,omitempty"`
-	BucketRequest       *ObjectReference    `json:"bucketRequest,omitempty"`
+	// +optional
+	BucketClassName string           `json:"bucketClassName,omitempty"`
+	BucketRequest   *ObjectReference `json:"bucketRequest,omitempty"`
 	// +listType=atomic
 	AllowedNamespaces []string `json:"allowedNamespaces,omitempty"`
-
-	Protocol Protocol `json:"protocol"`
+	Protocol          Protocol `json:"protocol"`
 	// +optional
 	Parameters map[string]string `json:"parameters,omitempty"`
 }
@@ -129,21 +130,21 @@ type BucketClass struct {
 	// +optional
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
-	Provisioner string `json:"provisioner,omitempty"`
 	// +optional
 	// +kubebuilder:default:=false
 	IsDefaultBucketClass bool `json:"isDefaultBucketClass,omitempty"`
 	// +listType=atomic
 	// +optional
 	AllowedNamespaces []string `json:"allowedNamespaces,omitempty"`
+	Protocol          string   `json:"protocol"`
 	// +optional
-	Protocol string `json:"protocol"`
-	// +listType=atomic
-	AnonymousAccessModes []AnonymousAccessMode `json:"anonymousAccessModes,omitempty"`
+	AnonymousAccessMode AnonymousAccessMode `json:"anonymousAccessMode,omitempty"`
 	// +kubebuilder:default:=retain
 	RetentionPolicy RetentionPolicy `json:"retentionPolicy,omitempty"`
 	// +optional
 	Parameters map[string]string `json:"parameters,omitempty"`
+	// +optional
+	Provisioner string `json:"provisioner,omitempty"`
 }
 
 // +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
@@ -166,6 +167,7 @@ type BucketAccessClass struct {
 	// +optional
 	metav1.ObjectMeta `json:"metadata,omitempty"`
 
+	// +optional
 	Provisioner string `json:"provisioner,omitempty"`
 
 	PolicyActionsConfigMap *ObjectReference `json:"policyActionsConfigMap,omitempty"`
@@ -183,8 +185,6 @@ type BucketAccessClassList struct {
 }
 
 type BucketAccessSpec struct {
-	Provisioner string `json:"provisioner,omitempty"`
-
 	// +optional
 	BucketInstanceName string `json:"bucketInstanceName,omitempty"`
 	// +optional
@@ -192,13 +192,15 @@ type BucketAccessSpec struct {
 	// +optional
 	ServiceAccount string `json:"serviceAccount,omitempty"`
 	// +optional
-	AccessSecretName string `json:"accessSecretName,omitempty"`
-	// +optional
 	MintedSecretName string `json:"mintedSecretName,omitempty"`
-	// +optional
-	PolicyActionsConfigMapData map[string]string `json:"policyActionsConfigMapData,omitempty"`
+
+	PolicyActionsConfigMapData string `json:"policyActionsConfigMapData,omitempty"`
+
 	// +optional
 	Principal string `json:"principal,omitempty"`
+
+	// +optional
+	Provisioner string `json:"provisioner,omitempty"`
 	// +optional
 	Parameters map[string]string `json:"parameters,omitempty"`
 }
@@ -238,11 +240,11 @@ type BucketAccessList struct {
 type BucketAccessRequestSpec struct {
 	// +optional
 	ServiceAccountName string `json:"serviceAccountName,omitempty"`
-	// +optional
-	AccessSecretName  string `json:"accessSecretName,omitempty"`
-	BucketRequestName string `json:"bucketRequestName,omitempty"`
-	// +optional
-	BucketAccessClassName string `json:"bucketAccessClassName,omitempty"`
+
+	BucketRequestName string `json:"bucketRequestName"`
+
+	BucketAccessClassName string `json:"bucketAccessClassName"`
+
 	// +optional
 	BucketAccessName string `json:"bucketAccessName,omitempty"`
 }
@@ -251,7 +253,7 @@ type BucketAccessRequestStatus struct {
 	// +optional
 	Message string `json:"message,omitempty"`
 	// +optional
-	AccessGranted bool `json:"accessGranted,omitempty"`
+	AccessGranted bool `json:"accessGranted"`
 }
 
 // +genclient

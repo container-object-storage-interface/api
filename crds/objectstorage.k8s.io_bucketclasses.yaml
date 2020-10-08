@@ -25,20 +25,17 @@ spec:
               type: string
             type: array
             x-kubernetes-list-type: atomic
-          anonymousAccessModes:
-            items:
-              properties:
-                private:
-                  type: boolean
-                publicReadOnly:
-                  type: boolean
-                publicReadWrite:
-                  type: boolean
-                publicWriteOnly:
-                  type: boolean
-              type: object
-            type: array
-            x-kubernetes-list-type: atomic
+          anonymousAccessMode:
+            properties:
+              private:
+                type: boolean
+              publicReadOnly:
+                type: boolean
+              publicReadWrite:
+                type: boolean
+              publicWriteOnly:
+                type: boolean
+            type: object
           apiVersion:
             description: 'APIVersion defines the versioned schema of this representation
               of an object. Servers should convert recognized schemas to the latest
@@ -65,6 +62,8 @@ spec:
           retentionPolicy:
             default: retain
             type: string
+        required:
+        - protocol
         type: object
     served: true
     storage: true
@@ -72,5 +71,5 @@ status:
   acceptedNames:
     kind: ""
     plural: ""
-  conditions: null
-  storedVersions: null
+  conditions: []
+  storedVersions: []

@@ -1,0 +1,85 @@
+apiVersion: objectstorage.k8s.io/v1alpha1
+kind: Bucket
+metadata:
+  name: bucket.objectstorage.k8s.io
+spec:
+  anonymousAccessMode:
+    private: true
+  bucketClassName: bucketclass.objectstorage.k8s.io
+  parameters:
+    parameter: test
+  provisioner: sample.minio.driver
+  releasePolicy: Delete
+  protocol:
+    protocolSignature: s3
+    s3:
+      endpoint: https://svoglq0pnb17di7.s3.us-east-1.amazonaws.com
+      bucketName: svoglq0pnb17di7
+      region: us-east-1
+      signatureVersion: s3v4
+---
+apiVersion: objectstorage.k8s.io/v1alpha1
+kind: BucketRequest
+metadata:
+  name: bucketrequest.objectstorage.k8s.io
+spec:
+  bucketInstanceName: bucket.objectstorage.k8s.io
+  bucketPrefix: prefix
+  bucketClassName: bucketclass.objectstorage.k8s.io
+  protocol:
+    name: s3
+    version: v4
+---
+apiVersion: objectstorage.k8s.io/v1alpha1
+kind: BucketClass
+metadata:
+  name: bucketclass.objectstorage.k8s.io
+spec:
+  isDefaultBucketClass: false
+  protocol:
+    protocolSignature: s3
+    s3:
+      endpoint: https://svoglq0pnb17di7.s3.us-east-1.amazonaws.com
+      bucketName: svoglq0pnb17di7
+      region: us-east-1
+      signatureVersion: s3v4
+  anonymousAccessMode:
+    private: true
+  releasePolicy: Delete
+  parameters:
+    parameter: test
+  provisioner: sample.minio.driver
+---
+apiVersion: objectstorage.k8s.io/v1alpha1
+kind: BucketAccessClass
+metadata:
+  name: bucketaccessclass.objectstorage.k8s.io
+spec:
+  provisioner: sample.minio.driver
+  policyActionsRef: dummy-policy-action-ref
+  parameters:
+    parameter: test
+---
+apiVersion: objectstorage.k8s.io/v1alpha1
+kind: BucketAccess
+metadata:
+  name: bucketaccess.objectstorage.k8s.io
+spec:
+  bucketInstanceName: bucket.objectstorage.k8s.io
+  bucketAccessRequestName: bucketaccessrequest.objectstorage.k8s.io
+  bucketAccessRequestNamespace: default
+  mintedSecretName: bucket-secret
+  provisioner: sample.minio.driver
+  policyActionsData: dummy-policy-action-data
+  parameters:
+    parameter: test
+---
+apiVersion: objectstorage.k8s.io/v1alpha1
+kind: BucketAccessRequest
+metadata:
+  name: bucketaccessrequest.objectstorage.k8s.io
+spec:
+  bucketAccessClassName: bucketaccessclass.objectstorage.k8s.io
+  bucketAccessName: bucketaccess.objectstorage.k8s.io
+  bucketRequestName: bucketrequest.objectstorage.k8s.io
+  
