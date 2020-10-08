@@ -34,8 +34,6 @@ spec:
             type: object
           spec:
             properties:
-              accessSecretName:
-                type: string
               bucketAccessRequest:
                 type: string
               bucketInstanceName:
@@ -47,9 +45,7 @@ spec:
                   type: string
                 type: object
               policyActionsConfigMapData:
-                additionalProperties:
-                  type: string
-                type: object
+                type: string
               principal:
                 type: string
               provisioner:
@@ -73,5 +69,5 @@ status:
   acceptedNames:
     kind: ""
     plural: ""
-  conditions: null
-  storedVersions: null
+  conditions: []
+  storedVersions: []
