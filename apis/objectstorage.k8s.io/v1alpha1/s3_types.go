@@ -5,8 +5,8 @@ package v1alpha1
 type S3SignatureVersion string
 
 const (
-	S3SignatureVersionV2 = "s3v2"
-	S3SignatureVersionV4 = "s3v4"
+	S3SignatureVersionV2 S3SignatureVersion = "s3v2"
+	S3SignatureVersionV4 S3SignatureVersion = "s3v4"
 )
 
 type S3Protocol struct {
